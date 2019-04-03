@@ -73,7 +73,7 @@ open class SKZoomingScrollView: UIScrollView {
         delegate = self
         showsHorizontalScrollIndicator = SKPhotoBrowserOptions.displayHorizontalScrollIndicator
         showsVerticalScrollIndicator = SKPhotoBrowserOptions.displayVerticalScrollIndicator
-        decelerationRate = .fast
+//        decelerationRate = .fast
         autoresizingMask = [.flexibleWidth, .flexibleTopMargin, .flexibleBottomMargin, .flexibleRightMargin, .flexibleLeftMargin]
     }
     
@@ -173,6 +173,27 @@ open class SKZoomingScrollView: UIScrollView {
     }
     
     // MARK: - image
+    
+    open func displayImage(_ image: UIImage) {
+        // image
+        imageView.image = image
+        imageView.contentMode = photo.contentMode
+        
+        var imageViewFrame: CGRect = .zero
+        imageViewFrame.origin = .zero
+        // long photo
+        if SKPhotoBrowserOptions.longPhotoWidthMatchScreen && image.size.height >= image.size.width {
+            let imageHeight = SKMesurement.screenWidth / image.size.width * image.size.height
+            imageViewFrame.size = CGSize(width: SKMesurement.screenWidth, height: imageHeight)
+        } else {
+            imageViewFrame.size = image.size
+        }
+        imageView.frame = imageViewFrame
+        
+        contentSize = imageViewFrame.size
+        setMaxMinZoomScalesForCurrentBounds()
+    }
+    
     open func displayImage(complete flag: Bool) {
         // reset scale
         maximumZoomScale = 1
@@ -189,23 +210,7 @@ open class SKZoomingScrollView: UIScrollView {
         }
         
         if let image = photo.underlyingImage, photo != nil {
-            // image
-            imageView.image = image
-            imageView.contentMode = photo.contentMode
-
-            var imageViewFrame: CGRect = .zero
-            imageViewFrame.origin = .zero
-            // long photo
-            if SKPhotoBrowserOptions.longPhotoWidthMatchScreen && image.size.height >= image.size.width {
-                let imageHeight = SKMesurement.screenWidth / image.size.width * image.size.height
-                imageViewFrame.size = CGSize(width: SKMesurement.screenWidth, height: imageHeight)
-            } else {
-                imageViewFrame.size = image.size
-            }
-            imageView.frame = imageViewFrame
-
-            contentSize = imageViewFrame.size
-            setMaxMinZoomScalesForCurrentBounds()
+            displayImage(image)
 		} else {
 			// change contentSize will reset contentOffset, so only set the contentsize zero when the image is nil
 			contentSize = CGSize.zero
