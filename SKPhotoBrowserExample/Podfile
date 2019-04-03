@@ -1,6 +1,8 @@
-platform :ios, '9.0'
+platform :ios, '10.0'
 use_frameworks!
 
 target "SKPhotoBrowserExample" do
     pod 'SDWebImage', '~>3.8'
+    pod 'Texture', '~> 2.8'
+    pod 'Texture/IGListKit'
 end

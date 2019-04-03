@@ -22,6 +22,7 @@ class FromLocalViewController: UIViewController, UICollectionViewDataSource, UIC
         SKPhotoBrowserOptions.displayStatusbar = true
         SKPhotoBrowserOptions.displayCounterLabel = true
         SKPhotoBrowserOptions.displayBackAndForwardButton = true
+        SKPhotoBrowserOptions.bounceAnimation = true
 
         setupTestData()
         setupCollectionView()
@@ -42,7 +43,7 @@ extension FromLocalViewController {
         return images.count
     }
     
-    @objc(collectionView:cellForItemAtIndexPath:) func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
+    func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
         guard let cell = collectionView.dequeueReusableCell(withReuseIdentifier: "exampleCollectionViewCell", for: indexPath) as? ExampleCollectionViewCell else {
             return UICollectionViewCell()
         }
@@ -56,7 +57,7 @@ extension FromLocalViewController {
 // MARK: - UICollectionViewDelegate
 
 extension FromLocalViewController {
-    @objc(collectionView:didSelectItemAtIndexPath:) func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath) {
+    func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath) {
         let browser = SKPhotoBrowser(photos: images, initialPageIndex: indexPath.row)
         browser.delegate = self
 
@@ -75,7 +76,7 @@ extension FromLocalViewController {
 // MARK: - SKPhotoBrowserDelegate
 
 extension FromLocalViewController {
-    func didShowPhotoAtIndex(_ index: Int) {
+    func didShowPhotoAtIndex(_ browser: SKPhotoBrowser, index: Int) {
         collectionView.visibleCells.forEach({$0.isHidden = false})
         collectionView.cellForItem(at: IndexPath(item: index, section: 0))?.isHidden = true
     }
