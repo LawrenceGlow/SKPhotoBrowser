@@ -17,6 +17,14 @@ extension UIApplication {
         }
         return .zero
     }
+    
+    static var isLandscape: Bool {
+        return shared.statusBarOrientation.isLandscape
+    }
+    
+    static var isPortrait: Bool {
+        return shared.statusBarOrientation.isPortrait
+    }
 }
 
 public func generateTintedImage(image: UIImage?, color: UIColor, backgroundColor: UIColor? = nil) -> UIImage? {

@@ -170,7 +170,7 @@ class SKPagingScrollView: UIScrollView {
     func frameForCaptionView(_ captionView: SKCaptionView, index: Int) -> CGRect {
         let pageFrame = frameForPageAtIndex(index)
         let captionSize = captionView.sizeThatFits(CGSize(width: pageFrame.size.width, height: 0))
-        let paginationFrame = browser?.paginationView.frame ?? .zero
+        let paginationFrame: CGRect = .zero//browser?.paginationView.frame ?? .zero
         let toolbarFrame: CGRect = .zero//browser?.toolbar.frame ?? .zero
         
         var frameSet = CGRect.zero

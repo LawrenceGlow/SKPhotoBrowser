@@ -145,12 +145,12 @@ open class SKPhotoBrowser: UIViewController {
         actionView.updateFrame(frame: view.frame)
 
         // paging
-        switch SKCaptionOptions.captionLocation {
-        case .basic:
-            paginationView.updateFrame(frame: view.frame)
-        case .bottom:
-            paginationView.frame = frameForPaginationAtOrientation()
-        }
+//        switch SKCaptionOptions.captionLocation {
+//        case .basic:
+//            paginationView.updateFrame(frame: view.frame)
+//        case .bottom:
+//            paginationView.frame = frameForPaginationAtOrientation()
+//        }
         pagingScrollView.updateFrame(view.bounds, currentPageIndex: currentPageIndex)
 
         isPerformingLayout = false
@@ -292,7 +292,8 @@ public extension SKPhotoBrowser {
             if !isViewActive {
                 pagingScrollView.tilePages()
             }
-            paginationView.update(currentPageIndex)
+            actionView.update(currentPageIndex)
+//            paginationView.update(currentPageIndex)
         }
         initPageIndex = currentPageIndex
     }
@@ -352,7 +353,7 @@ public extension SKPhotoBrowser {
     }
     
     func areControlsHidden() -> Bool {
-        return paginationView.alpha == 0.0
+        return false//paginationView.alpha == 0.0
     }
     
     func getCurrentPageIndex() -> Int {
@@ -547,7 +548,8 @@ internal extension SKPhotoBrowser {
             if currentPageIndex != 0 {
                 gotoPreviousPage()
             }
-            paginationView.update(currentPageIndex)
+            actionView.update(currentPageIndex)
+//            paginationView.update(currentPageIndex)
             
         } else if photos.count == 1 {
             dismissPhotoBrowser(animated: true)
@@ -590,8 +592,8 @@ private extension SKPhotoBrowser {
     }
 
     func configurePaginationView() {
-        paginationView = SKPaginationView(frame: view.frame, browser: self)
-        view.addSubview(paginationView)
+//        paginationView = SKPaginationView(frame: view.frame, browser: self)
+//        view.addSubview(paginationView)
     }
     
     func configureToolbar() {
@@ -607,7 +609,7 @@ private extension SKPhotoBrowser {
         pagingScrollView.setControlsHidden(hidden: hidden)
 
         // paging animation
-        paginationView.setControlsHidden(hidden: hidden)
+//        paginationView.setControlsHidden(hidden: hidden)
         
         // action view animation
         actionView.animate(hidden: hidden)
@@ -636,7 +638,8 @@ extension SKPhotoBrowser: UIScrollViewDelegate {
         
         if currentPageIndex != previousCurrentPage {
             delegate?.didShowPhotoAtIndex?(self, index: currentPageIndex)
-            paginationView.update(currentPageIndex)
+            actionView.update(currentPageIndex)
+//            paginationView.update(currentPageIndex)
         }
     }
     
