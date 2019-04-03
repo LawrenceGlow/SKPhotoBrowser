@@ -22,10 +22,10 @@ class SKButton: UIButton {
             return UIEdgeInsets(top: 12, left: 12, bottom: 12, right: 12)
         }
     }
-    fileprivate let size: CGSize = CGSize(width: 44, height: 44)
+    fileprivate let size: CGSize = CGSize(width: 18, height: 18)
     fileprivate var marginX: CGFloat = 0
     fileprivate var marginY: CGFloat = 0
-    fileprivate var extraMarginY: CGFloat = SKMesurement.isPhoneX ? 10 : 0
+    fileprivate var extraMarginY: CGFloat = SKMesurement.isPhoneX ? 13 : 0
     
     func setup(_ imageName: String) {
         backgroundColor = .clear
@@ -33,7 +33,7 @@ class SKButton: UIButton {
         translatesAutoresizingMaskIntoConstraints = true
         autoresizingMask = [.flexibleBottomMargin, .flexibleLeftMargin, .flexibleRightMargin, .flexibleTopMargin]
         
-        let image = UIImage(named: "SKPhotoBrowser.bundle/images/\(imageName)", in: bundle, compatibleWith: nil) ?? UIImage()
+        let image = UIImage(named: imageName) ?? UIImage()
         setImage(image, for: .normal)
     }
   
@@ -65,12 +65,13 @@ class SKImageButton: SKButton {
 }
 
 class SKCloseButton: SKImageButton {
-    override var imageName: String { return "btn_common_close_wh" }
+    override var imageName: String { return "browser_close_button" }
     override var marginX: CGFloat {
         get {
-            return SKPhotoBrowserOptions.swapCloseAndDeleteButtons
-                ? SKMesurement.screenWidth - SKButtonOptions.closeButtonPadding.x - self.size.width
-                : SKButtonOptions.closeButtonPadding.x
+            return 16.0
+//            return SKPhotoBrowserOptions.swapCloseAndDeleteButtons
+//                ? SKMesurement.screenWidth - SKButtonOptions.closeButtonPadding.x - self.size.width
+//                : SKButtonOptions.closeButtonPadding.x
         }
         set { super.marginX = newValue }
     }

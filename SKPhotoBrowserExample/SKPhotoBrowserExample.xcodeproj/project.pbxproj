@@ -7,6 +7,7 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		02012F5522549975000F08C4 /* Utils.swift in Sources */ = {isa = PBXBuildFile; fileRef = 02012F5422549974000F08C4 /* Utils.swift */; };
 		212705891C92C69C00466223 /* FromCameraRollViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 212705881C92C69C00466223 /* FromCameraRollViewController.swift */; };
 		8909B55B1BC792150060A053 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8909B55A1BC792150060A053 /* AppDelegate.swift */; };
 		8909B55D1BC792150060A053 /* FromLocalViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8909B55C1BC792150060A053 /* FromLocalViewController.swift */; };
@@ -70,6 +71,7 @@
 /* End PBXCopyFilesBuildPhase section */
 
 /* Begin PBXFileReference section */
+		02012F5422549974000F08C4 /* Utils.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; name = Utils.swift; path = ../../SKPhotoBrowser/Utils.swift; sourceTree = "<group>"; };
 		212705881C92C69C00466223 /* FromCameraRollViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = FromCameraRollViewController.swift; sourceTree = "<group>"; };
 		3CB7DBB2A904933FBC55D566 /* Pods-SKPhotoBrowserExample.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-SKPhotoBrowserExample.release.xcconfig"; path = "Pods/Target Support Files/Pods-SKPhotoBrowserExample/Pods-SKPhotoBrowserExample.release.xcconfig"; sourceTree = "<group>"; };
 		6726ABE37DF17134C0BA8EBC /* Pods-SKPhotoBrowserExample.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-SKPhotoBrowserExample.debug.xcconfig"; path = "Pods/Target Support Files/Pods-SKPhotoBrowserExample/Pods-SKPhotoBrowserExample.debug.xcconfig"; sourceTree = "<group>"; };
@@ -174,6 +176,7 @@
 			isa = PBXGroup;
 			children = (
 				8909B55C1BC792150060A053 /* FromLocalViewController.swift */,
+				02012F5422549974000F08C4 /* Utils.swift */,
 				212705881C92C69C00466223 /* FromCameraRollViewController.swift */,
 				89FC5DBA1D54A04900F1BE52 /* FromWebViewController.swift */,
 			);
@@ -259,6 +262,7 @@
 				TargetAttributes = {
 					8909B5561BC792150060A053 = {
 						CreatedOnToolsVersion = 7.0;
+						DevelopmentTeam = KR9G98P8SN;
 						LastSwiftMigration = 0800;
 					};
 				};
@@ -384,6 +388,7 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				02012F5522549975000F08C4 /* Utils.swift in Sources */,
 				212705891C92C69C00466223 /* FromCameraRollViewController.swift in Sources */,
 				8909B55D1BC792150060A053 /* FromLocalViewController.swift in Sources */,
 				8909B55B1BC792150060A053 /* AppDelegate.swift in Sources */,
@@ -516,7 +521,9 @@
 				ALWAYS_EMBED_SWIFT_STANDARD_LIBRARIES = YES;
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				CODE_SIGN_IDENTITY = "iPhone Developer";
+				DEVELOPMENT_TEAM = KR9G98P8SN;
 				INFOPLIST_FILE = SKPhotoBrowserExample/Info.plist;
+				IPHONEOS_DEPLOYMENT_TARGET = 10.0;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
 				PRODUCT_BUNDLE_IDENTIFIER = com.keishi.suzuki.aSKPhotoBrowserExample;
 				PRODUCT_NAME = "$(TARGET_NAME)";
@@ -531,7 +538,9 @@
 				ALWAYS_EMBED_SWIFT_STANDARD_LIBRARIES = YES;
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				CODE_SIGN_IDENTITY = "iPhone Developer";
+				DEVELOPMENT_TEAM = KR9G98P8SN;
 				INFOPLIST_FILE = SKPhotoBrowserExample/Info.plist;
+				IPHONEOS_DEPLOYMENT_TARGET = 10.0;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
 				PRODUCT_BUNDLE_IDENTIFIER = com.keishi.suzuki.aSKPhotoBrowserExample;
 				PRODUCT_NAME = "$(TARGET_NAME)";

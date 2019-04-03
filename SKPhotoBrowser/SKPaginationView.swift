@@ -14,6 +14,7 @@ class SKPaginationView: UIView {
     var counterLabel: UILabel?
     var prevButton: UIButton?
     var nextButton: UIButton?
+    var shareButton: UIButton?
     private var margin: CGFloat = 100
     private var extraMargin: CGFloat = SKMesurement.isPhoneX ? 40 : 0
     
@@ -29,13 +30,14 @@ class SKPaginationView: UIView {
     
     convenience init(frame: CGRect, browser: SKPhotoBrowser?) {
         self.init(frame: frame)
-        self.frame = CGRect(x: 0, y: frame.height - margin - extraMargin, width: frame.width, height: 100)
+        self.frame = CGRect(x: 0, y: frame.height - margin - extraMargin, width: frame.width, height: 35)
         self.browser = browser
 
         setupApperance()
-        setupCounterLabel()
-        setupPrevButton()
-        setupNextButton()
+        setupShareButton()
+//        setupCounterLabel()
+//        setupPrevButton()
+//        setupNextButton()
         
         update(browser?.currentPageIndex ?? 0)
     }
@@ -47,6 +49,8 @@ class SKPaginationView: UIView {
             } else if let prevButton = prevButton, prevButton.frame.contains(point) {
                 return view
             } else if let nextButton = nextButton, nextButton.frame.contains(point) {
+                return view
+            } else if let shareButton = shareButton, shareButton.frame.contains(point) {
                 return view
             }
             return nil
@@ -85,6 +89,21 @@ private extension SKPaginationView {
     func setupApperance() {
         backgroundColor = .clear
         clipsToBounds = true
+    }
+    
+    func setupShareButton() {
+        let button = UIButton(type: .detailDisclosure)
+//        UIButton(type: .system)
+//        button.setImage(UIImage(named: "browser_share_icon"), for: .normal)
+        button.frame = CGRect(
+            x: (frame.width-100)/2,
+            y: (frame.height-35)/2,
+            width: 100,
+            height: 35
+        )
+        button.addTarget(browser, action: #selector(SKPhotoBrowser.shareButtonPressed), for: .touchUpInside)
+        addSubview(button)
+        shareButton = button
     }
     
     func setupCounterLabel() {

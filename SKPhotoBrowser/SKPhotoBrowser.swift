@@ -12,11 +12,17 @@ public let SKPHOTO_LOADING_DID_END_NOTIFICATION = "photoLoadingDidEndNotificatio
 
 // MARK: - SKPhotoBrowser
 open class SKPhotoBrowser: UIViewController {
+    public enum BrowserStyle {
+        case `default`
+        case post
+    }
+    
     // open function
     open var currentPageIndex: Int = 0
     open var initPageIndex: Int = 0
     open var activityItemProvider: UIActivityItemProvider?
     open var photos: [SKPhotoProtocol] = []
+    open var style: BrowserStyle = .default
     
     internal lazy var pagingScrollView: SKPagingScrollView = SKPagingScrollView(frame: self.view.frame, browser: self)
     
@@ -248,14 +254,14 @@ open class SKPhotoBrowser: UIViewController {
         
         activityViewController = UIActivityViewController(activityItems: activityItems, applicationActivities: nil)
         activityViewController.completionWithItemsHandler = { (activity, success, items, error) in
-            self.hideControlsAfterDelay()
+//            self.hideControlsAfterDelay()
             self.activityViewController = nil
         }
         if UI_USER_INTERFACE_IDIOM() == .phone {
             present(activityViewController, animated: true, completion: nil)
         } else {
             activityViewController.modalPresentationStyle = .popover
-            let popover: UIPopoverPresentationController! = activityViewController.popoverPresentationController
+//            let popover: UIPopoverPresentationController! = activityViewController.popoverPresentationController
 //            popover.barButtonItem = toolbar.toolActionButton
             present(activityViewController, animated: true, completion: nil)
         }
@@ -265,13 +271,13 @@ open class SKPhotoBrowser: UIViewController {
 // MARK: - Public Function For Customizing Buttons
 
 public extension SKPhotoBrowser {
-    func updateCloseButton(_ image: UIImage, size: CGSize? = nil) {
-        actionView.updateCloseButton(image: image, size: size)
-    }
-    
-    func updateDeleteButton(_ image: UIImage, size: CGSize? = nil) {
-        actionView.updateDeleteButton(image: image, size: size)
-    }
+//    func updateCloseButton(_ image: UIImage, size: CGSize? = nil) {
+//        actionView.updateCloseButton(image: image, size: size)
+//    }
+//
+//    func updateDeleteButton(_ image: UIImage, size: CGSize? = nil) {
+//        actionView.updateDeleteButton(image: image, size: size)
+//    }
 }
 
 // MARK: - Public Function For Browser Control
@@ -301,7 +307,7 @@ public extension SKPhotoBrowser {
             let pageFrame = frameForPageAtIndex(index)
             pagingScrollView.jumpToPageAtIndex(pageFrame)
         }
-        hideControlsAfterDelay()
+//        hideControlsAfterDelay()
     }
     
     func photoAtIndex(_ index: Int) -> SKPhotoProtocol {
@@ -327,7 +333,7 @@ public extension SKPhotoBrowser {
         // reset
         cancelControlHiding()
         // start
-        controlVisibilityTimer = Timer.scheduledTimer(timeInterval: 4.0, target: self, selector: #selector(SKPhotoBrowser.hideControls(_:)), userInfo: nil, repeats: false)
+//        controlVisibilityTimer = Timer.scheduledTimer(timeInterval: 4.0, target: self, selector: #selector(SKPhotoBrowser.hideControls(_:)), userInfo: nil, repeats: false)
     }
     
     func hideControls() {
@@ -475,41 +481,57 @@ internal extension SKPhotoBrowser {
                 UIView.commitAnimations()
             }
         }
+        
+        if sender.state == .ended || sender.state == .cancelled {
+            setControlsHidden(false, animated: true, permanent: false)
+        }
     }
    
-    @objc func actionButtonPressed(ignoreAndShare: Bool) {
+    @objc func shareButtonPressed(_ sender: UIButton) {
+        popupShare()
+    }
+    
+    @objc func moreButtonPressed(_ sender: UIButton) {
         delegate?.willShowActionSheet?(currentPageIndex)
         
         guard photos.count > 0 else {
             return
         }
         
-        if let titles = SKPhotoBrowserOptions.actionButtonTitles {
-            let actionSheetController = UIAlertController(title: nil, message: nil, preferredStyle: .actionSheet)
-            actionSheetController.addAction(UIAlertAction(title: cancelTitle, style: .cancel))
+        let actionSheetController = UIAlertController(title: nil, message: nil, preferredStyle: .actionSheet)
+        actionSheetController.addAction(UIAlertAction(title: "Cancel", style: .cancel, handler: nil))
+        
+        for idx in 0..<3 {
+            var title: String = ""
+            var style: UIAlertAction.Style = .default
             
-            for idx in titles.indices {
-                actionSheetController.addAction(UIAlertAction(title: titles[idx], style: .default, handler: { (_) -> Void in
-                    self.delegate?.didDismissActionSheetWithButtonIndex?(idx, photoIndex: self.currentPageIndex)
-                }))
+            switch idx {
+            case 0:
+                title = "Edit"
+            case 1:
+                title = "Share"
+            case 2:
+                title = "Delete"
+                style = .destructive
+            default: break
             }
             
-            if UI_USER_INTERFACE_IDIOM() == .phone {
-                present(actionSheetController, animated: true, completion: nil)
-            } else {
-                actionSheetController.modalPresentationStyle = .popover
-                
-                if let popoverController = actionSheetController.popoverPresentationController {
-                    popoverController.sourceView = self.view
-//                    popoverController.barButtonItem = toolbar.toolActionButton
-                }
-                
-                present(actionSheetController, animated: true, completion: { () -> Void in
-                })
-            }
-            
+            let action = UIAlertAction(title: title, style: style, handler: { (_) -> Void in
+                self.delegate?.didDismissActionSheetWithButtonIndex?(idx, photoIndex: self.currentPageIndex)
+            })
+            actionSheetController.addAction(action)
+        }
+        
+        if UI_USER_INTERFACE_IDIOM() == .phone {
+            present(actionSheetController, animated: true, completion: nil)
         } else {
-            popupShare()
+            actionSheetController.modalPresentationStyle = .popover
+            if let popoverController = actionSheetController.popoverPresentationController {
+                popoverController.sourceView = self.view
+                //                    popoverController.barButtonItem = toolbar.toolActionButton
+            }
+            present(actionSheetController, animated: true, completion: { () -> Void in
+            })
         }
     }
     
@@ -619,7 +641,7 @@ extension SKPhotoBrowser: UIScrollViewDelegate {
     }
     
     public func scrollViewDidEndDecelerating(_ scrollView: UIScrollView) {
-        hideControlsAfterDelay()
+//        hideControlsAfterDelay()
         
         let currentIndex = pagingScrollView.contentOffset.x / pagingScrollView.frame.size.width
         delegate?.didScrollToIndex?(self, index: Int(currentIndex))

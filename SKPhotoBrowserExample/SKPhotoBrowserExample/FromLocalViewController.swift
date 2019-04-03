@@ -23,7 +23,8 @@ class FromLocalViewController: UIViewController, UICollectionViewDataSource, UIC
         SKPhotoBrowserOptions.displayCounterLabel = true
         SKPhotoBrowserOptions.displayBackAndForwardButton = true
         SKPhotoBrowserOptions.bounceAnimation = true
-
+        SKPhotoBrowserOptions.actionButtonTitles = ["Edit", "Share", "Delete"]
+        
         setupTestData()
         setupCollectionView()
     }

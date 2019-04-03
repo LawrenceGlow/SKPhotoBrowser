@@ -9,9 +9,13 @@
 import UIKit
 
 class SKActionView: UIView {
-    internal weak var browser: SKPhotoBrowser?
-    internal var closeButton: SKCloseButton!
-    internal var deleteButton: SKDeleteButton!
+    var style: SKPhotoBrowser.BrowserStyle!
+    weak var browser: SKPhotoBrowser?
+    var topBlurView: VisualEffectView!
+    var bottomBlurView: VisualEffectView!
+    var closeButton: UIButton!
+    var countLabel: UILabel!
+    var moreButton: UIButton!
     
     // Action
     fileprivate var cancelTitle = "Cancel"
@@ -24,17 +28,64 @@ class SKActionView: UIView {
         super.init(frame: frame)
     }
     
-    convenience init(frame: CGRect, browser: SKPhotoBrowser) {
+    convenience init(frame: CGRect, browser: SKPhotoBrowser, style: SKPhotoBrowser.BrowserStyle = .default) {
         self.init(frame: frame)
         self.browser = browser
-
-        configureCloseButton()
-        configureDeleteButton()
+        self.style = style
+        
+        topBlurView = VisualEffectView()
+        topBlurView.colorTint = .black
+        topBlurView.colorTintAlpha = 0.5
+        topBlurView.blurRadius = 10
+        
+        addSubview(topBlurView)
+        
+        bottomBlurView = VisualEffectView()
+        bottomBlurView.colorTint = .black
+        bottomBlurView.colorTintAlpha = 0.5
+        bottomBlurView.blurRadius = 10
+        addSubview(bottomBlurView)
+        
+        closeButton = UIButton(type: .custom)
+        closeButton.setImage(UIImage(named: "browser_close_button"), for: .normal)
+        closeButton.addTarget(self, action: #selector(closeButtonPressed), for: .touchUpInside)
+        topBlurView.contentView.addSubview(closeButton)
+        
+        countLabel = UILabel()
+        countLabel.font = UIFont.systemFont(ofSize: 17)
+        countLabel.textColor = .white
+        countLabel.textAlignment = .center
+        topBlurView.contentView.addSubview(countLabel)
+        
+        moreButton = UIButton(type: .custom)
+        if style == .default {
+            moreButton.setImage(UIImage(named: "browser_more_icon"), for: .normal)
+            moreButton.addTarget(self, action: #selector(moreButtonPressed), for: .touchUpInside)
+        } else {
+            moreButton.setImage(UIImage(named: "browser_delete_icon"), for: .normal)
+            moreButton.addTarget(self, action: #selector(deleteButtonPressed), for: .touchUpInside)
+        }
+        
+        topBlurView.contentView.addSubview(moreButton)
+        
+        
+        let button = UIButton(type: .detailDisclosure)
+        //        UIButton(type: .system)
+        //        button.setImage(UIImage(named: "browser_share_icon"), for: .normal)
+        button.frame = CGRect(
+            x: (frame.width-100)/2,
+            y: (frame.height-35)/2,
+            width: 100,
+            height: 35
+        )
+        button.addTarget(browser, action: #selector(SKPhotoBrowser.shareButtonPressed), for: .touchUpInside)
+        addSubview(button)
+        shareButton = button
     }
     
     override func hitTest(_ point: CGPoint, with event: UIEvent?) -> UIView? {
         if let view = super.hitTest(point, with: event) {
-            if closeButton.frame.contains(point) || deleteButton.frame.contains(point) {
+            if closeButton.frame.contains(point) || moreButton.frame.contains(point) {
                 return view
             }
             return nil
@@ -44,32 +95,24 @@ class SKActionView: UIView {
     
     func updateFrame(frame: CGRect) {
         self.frame = frame
+        topBlurView.frame = CGRect(x: 0, y: 0, width: frame.width, height: 88)
+        bottomBlurView.frame = CGRect(x: 0, y: frame.height-130, width: frame.width, height: 130)
+        closeButton.frame = CGRect(x: 16.0, y: UIApplication.safeInsets.top, width: 44.0, height: 44.0)
+        countLabel.frame = CGRect(x: (topBlurView.contentView.frame.width-200)/2, y: UIApplication.safeInsets.top, width: 200, height: 44)
+        moreButton.frame = CGRect(x: topBlurView.contentView.frame.width-44-6, y: UIApplication.safeInsets.top, width: 44, height: 44)
         setNeedsDisplay()
-    }
-
-    func updateCloseButton(image: UIImage, size: CGSize? = nil) {
-        configureCloseButton(image: image, size: size)
-    }
-    
-    func updateDeleteButton(image: UIImage, size: CGSize? = nil) {
-        configureDeleteButton(image: image, size: size)
     }
     
     func animate(hidden: Bool) {
-        let closeFrame: CGRect = hidden ? closeButton.hideFrame : closeButton.showFrame
-        let deleteFrame: CGRect = hidden ? deleteButton.hideFrame : deleteButton.showFrame
+//        let closeFrame: CGRect = hidden ? closeButton.hideFrame : closeButton.showFrame
+//        let deleteFrame: CGRect = hidden ? deleteButton.hideFrame : deleteButton.showFrame
+        let alpha: CGFloat = hidden ? 0.0 : 1.0
         UIView.animate(withDuration: 0.35,
                        animations: { () -> Void in
-                        let alpha: CGFloat = hidden ? 0.0 : 1.0
-
-                        if SKPhotoBrowserOptions.displayCloseButton {
-                            self.closeButton.alpha = alpha
-                            self.closeButton.frame = closeFrame
-                        }
-                        if SKPhotoBrowserOptions.displayDeleteButton {
-                            self.deleteButton.alpha = alpha
-                            self.deleteButton.frame = deleteFrame
-                        }
+                        self.closeButton.alpha = alpha
+                        self.moreButton.alpha = alpha
+                        self.topBlurView.blurRadius = hidden ? 0 : 10
+                        self.topBlurView.colorTint = hidden ? .clear : .black
         }, completion: nil)
     }
     
@@ -79,45 +122,12 @@ class SKActionView: UIView {
     
     @objc func deleteButtonPressed(_ sender: UIButton) {
         guard let browser = self.browser else { return }
-        
         browser.delegate?.removePhoto?(browser, index: browser.currentPageIndex) { [weak self] in
             self?.browser?.deleteImage()
         }
     }
-}
-
-extension SKActionView {
-    func configureCloseButton(image: UIImage? = nil, size: CGSize? = nil) {
-        if closeButton == nil {
-            closeButton = SKCloseButton(frame: .zero)
-            closeButton.addTarget(self, action: #selector(closeButtonPressed(_:)), for: .touchUpInside)
-            closeButton.isHidden = !SKPhotoBrowserOptions.displayCloseButton
-            addSubview(closeButton)
-        }
-
-        if let size = size {
-            closeButton.setFrameSize(size)
-        }
-        
-        if let image = image {
-            closeButton.setImage(image, for: .normal)
-        }
-    }
     
-    func configureDeleteButton(image: UIImage? = nil, size: CGSize? = nil) {
-        if deleteButton == nil {
-            deleteButton = SKDeleteButton(frame: .zero)
-            deleteButton.addTarget(self, action: #selector(deleteButtonPressed(_:)), for: .touchUpInside)
-            deleteButton.isHidden = !SKPhotoBrowserOptions.displayDeleteButton
-            addSubview(deleteButton)
-        }
-        
-        if let size = size {
-            deleteButton.setFrameSize(size)
-        }
-        
-        if let image = image {
-            deleteButton.setImage(image, for: .normal)
-        }
+    @objc func moreButtonPressed(_ sender: UIButton) {
+        browser?.moreButtonPressed(sender)
     }
 }
