@@ -7,7 +7,49 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
-		02012F5522549975000F08C4 /* Utils.swift in Sources */ = {isa = PBXBuildFile; fileRef = 02012F5422549974000F08C4 /* Utils.swift */; };
+		0265631B2255C0720004886E /* TableViewCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 0265631A2255C0720004886E /* TableViewCell.m */; };
+		026563812255C6970004886E /* LTMorphingLabel+Fall.swift in Sources */ = {isa = PBXBuildFile; fileRef = 026563512255C6960004886E /* LTMorphingLabel+Fall.swift */; };
+		026563822255C6970004886E /* LTEasing.swift in Sources */ = {isa = PBXBuildFile; fileRef = 026563532255C6960004886E /* LTEasing.swift */; };
+		026563832255C6970004886E /* LTEmitterView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 026563542255C6960004886E /* LTEmitterView.swift */; };
+		026563842255C6970004886E /* LTCharacterLimbo.swift in Sources */ = {isa = PBXBuildFile; fileRef = 026563552255C6960004886E /* LTCharacterLimbo.swift */; };
+		026563852255C6970004886E /* Fire.png in Resources */ = {isa = PBXBuildFile; fileRef = 026563572255C6960004886E /* Fire.png */; };
+		026563862255C6970004886E /* Sparkle.png in Resources */ = {isa = PBXBuildFile; fileRef = 026563582255C6960004886E /* Sparkle.png */; };
+		026563872255C6970004886E /* Fragment.png in Resources */ = {isa = PBXBuildFile; fileRef = 026563592255C6960004886E /* Fragment.png */; };
+		026563882255C6970004886E /* Smoke.png in Resources */ = {isa = PBXBuildFile; fileRef = 0265635A2255C6960004886E /* Smoke.png */; };
+		026563892255C6970004886E /* LTCharacterDiffResult.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0265635B2255C6960004886E /* LTCharacterDiffResult.swift */; };
+		0265638A2255C6970004886E /* LTMorphingLabel+Evaporate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0265635C2255C6960004886E /* LTMorphingLabel+Evaporate.swift */; };
+		0265638B2255C6970004886E /* LTStringDiffResult.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0265635D2255C6960004886E /* LTStringDiffResult.swift */; };
+		0265638C2255C6970004886E /* LTMorphingLabel+Burn.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0265635E2255C6960004886E /* LTMorphingLabel+Burn.swift */; };
+		0265638D2255C6970004886E /* LTMorphingLabel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0265635F2255C6960004886E /* LTMorphingLabel.swift */; };
+		0265638E2255C6970004886E /* LTMorphingLabel+Anvil.swift in Sources */ = {isa = PBXBuildFile; fileRef = 026563602255C6960004886E /* LTMorphingLabel+Anvil.swift */; };
+		0265638F2255C6970004886E /* LTMorphingLabel+Sparkle.swift in Sources */ = {isa = PBXBuildFile; fileRef = 026563612255C6960004886E /* LTMorphingLabel+Sparkle.swift */; };
+		026563902255C6970004886E /* LTMorphingLabel+Pixelate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 026563622255C6960004886E /* LTMorphingLabel+Pixelate.swift */; };
+		026563912255C6970004886E /* LTMorphingEffect.swift in Sources */ = {isa = PBXBuildFile; fileRef = 026563632255C6960004886E /* LTMorphingEffect.swift */; };
+		026563922255C6970004886E /* SKPhotoBrowser.swift in Sources */ = {isa = PBXBuildFile; fileRef = 026563662255C6970004886E /* SKPhotoBrowser.swift */; };
+		026563932255C6970004886E /* SKMesurement.swift in Sources */ = {isa = PBXBuildFile; fileRef = 026563672255C6970004886E /* SKMesurement.swift */; };
+		026563942255C6970004886E /* SKZoomingScrollView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 026563682255C6970004886E /* SKZoomingScrollView.swift */; };
+		026563952255C6970004886E /* SKPaginationView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 026563692255C6970004886E /* SKPaginationView.swift */; };
+		026563962255C6970004886E /* SKIndicatorView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0265636A2255C6970004886E /* SKIndicatorView.swift */; };
+		026563972255C6970004886E /* SKAnimator.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0265636B2255C6970004886E /* SKAnimator.swift */; };
+		026563982255C6970004886E /* SKPhotoBrowserOptions.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0265636C2255C6970004886E /* SKPhotoBrowserOptions.swift */; };
+		026563992255C6970004886E /* SKDetectingImageView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0265636D2255C6970004886E /* SKDetectingImageView.swift */; };
+		0265639A2255C6970004886E /* UIApplication+UIWindow.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0265636E2255C6970004886E /* UIApplication+UIWindow.swift */; };
+		0265639B2255C6970004886E /* SKPagingScrollView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0265636F2255C6970004886E /* SKPagingScrollView.swift */; };
+		0265639C2255C6970004886E /* SKDetectingView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 026563702255C6970004886E /* SKDetectingView.swift */; };
+		0265639D2255C6970004886E /* SKCache.swift in Sources */ = {isa = PBXBuildFile; fileRef = 026563712255C6970004886E /* SKCache.swift */; };
+		0265639E2255C6970004886E /* UIImage+Rotation.swift in Sources */ = {isa = PBXBuildFile; fileRef = 026563732255C6970004886E /* UIImage+Rotation.swift */; };
+		0265639F2255C6970004886E /* UIView+Radius.swift in Sources */ = {isa = PBXBuildFile; fileRef = 026563742255C6970004886E /* UIView+Radius.swift */; };
+		026563A02255C6970004886E /* SKCaptionView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 026563752255C6970004886E /* SKCaptionView.swift */; };
+		026563A12255C6970004886E /* SKLocalPhoto.swift in Sources */ = {isa = PBXBuildFile; fileRef = 026563762255C6970004886E /* SKLocalPhoto.swift */; };
+		026563A22255C6970004886E /* SKPhoto.swift in Sources */ = {isa = PBXBuildFile; fileRef = 026563772255C6970004886E /* SKPhoto.swift */; };
+		026563A32255C6970004886E /* SKActionView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 026563782255C6970004886E /* SKActionView.swift */; };
+		026563A42255C6970004886E /* SKToolbar.swift in Sources */ = {isa = PBXBuildFile; fileRef = 026563792255C6970004886E /* SKToolbar.swift */; };
+		026563A52255C6970004886E /* Utils.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0265637A2255C6970004886E /* Utils.swift */; };
+		026563A62255C6970004886E /* SKPhotoBrowserDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0265637B2255C6970004886E /* SKPhotoBrowserDelegate.swift */; };
+		026563A72255C6970004886E /* SKCacheable.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0265637C2255C6970004886E /* SKCacheable.swift */; };
+		026563A82255C6970004886E /* SKPhotoBrowser.bundle in Resources */ = {isa = PBXBuildFile; fileRef = 0265637D2255C6970004886E /* SKPhotoBrowser.bundle */; };
+		026563A92255C6970004886E /* VisualEffectView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0265637E2255C6970004886E /* VisualEffectView.swift */; };
+		026563AA2255C6970004886E /* SKButtons.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0265637F2255C6970004886E /* SKButtons.swift */; };
 		212705891C92C69C00466223 /* FromCameraRollViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 212705881C92C69C00466223 /* FromCameraRollViewController.swift */; };
 		8909B55B1BC792150060A053 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8909B55A1BC792150060A053 /* AppDelegate.swift */; };
 		8909B55D1BC792150060A053 /* FromLocalViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8909B55C1BC792150060A053 /* FromLocalViewController.swift */; };
@@ -27,34 +69,8 @@
 		8909B58B1BC792DC0060A053 /* image8.jpg in Resources */ = {isa = PBXBuildFile; fileRef = 8909B57F1BC792DC0060A053 /* image8.jpg */; };
 		8909B58C1BC792DC0060A053 /* image9.jpg in Resources */ = {isa = PBXBuildFile; fileRef = 8909B5801BC792DC0060A053 /* image9.jpg */; };
 		89FC5DBB1D54A04900F1BE52 /* FromWebViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 89FC5DBA1D54A04900F1BE52 /* FromWebViewController.swift */; };
-		A6A7B7801C9578E30025AC07 /* SKPhotoBrowser.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 8909B5711BC792570060A053 /* SKPhotoBrowser.framework */; };
-		A6A7B7811C9578E30025AC07 /* SKPhotoBrowser.framework in Embed Frameworks */ = {isa = PBXBuildFile; fileRef = 8909B5711BC792570060A053 /* SKPhotoBrowser.framework */; settings = {ATTRIBUTES = (CodeSignOnCopy, RemoveHeadersOnCopy, ); }; };
 		EB55C74F2E19BE99A3DD28FF /* Pods_SKPhotoBrowserExample.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = FC185D4686B5554C11523E7C /* Pods_SKPhotoBrowserExample.framework */; };
 /* End PBXBuildFile section */
-
-/* Begin PBXContainerItemProxy section */
-		8909B5701BC792570060A053 /* PBXContainerItemProxy */ = {
-			isa = PBXContainerItemProxy;
-			containerPortal = 8909B56C1BC792570060A053 /* SKPhotoBrowser.xcodeproj */;
-			proxyType = 2;
-			remoteGlobalIDString = 8909B5301BC791280060A053;
-			remoteInfo = SKPhotoBrowser;
-		};
-		89FC5DBD1D54A04A00F1BE52 /* PBXContainerItemProxy */ = {
-			isa = PBXContainerItemProxy;
-			containerPortal = 8909B56C1BC792570060A053 /* SKPhotoBrowser.xcodeproj */;
-			proxyType = 2;
-			remoteGlobalIDString = A64B89331CB04222000071B9;
-			remoteInfo = SKPhotoBrowserTests;
-		};
-		A6A7B7821C9578E30025AC07 /* PBXContainerItemProxy */ = {
-			isa = PBXContainerItemProxy;
-			containerPortal = 8909B56C1BC792570060A053 /* SKPhotoBrowser.xcodeproj */;
-			proxyType = 1;
-			remoteGlobalIDString = 8909B52F1BC791280060A053;
-			remoteInfo = SKPhotoBrowser;
-		};
-/* End PBXContainerItemProxy section */
 
 /* Begin PBXCopyFilesBuildPhase section */
 		A6A7B7841C9578E30025AC07 /* Embed Frameworks */ = {
@@ -63,7 +79,6 @@
 			dstPath = "";
 			dstSubfolderSpec = 10;
 			files = (
-				A6A7B7811C9578E30025AC07 /* SKPhotoBrowser.framework in Embed Frameworks */,
 			);
 			name = "Embed Frameworks";
 			runOnlyForDeploymentPostprocessing = 0;
@@ -71,7 +86,53 @@
 /* End PBXCopyFilesBuildPhase section */
 
 /* Begin PBXFileReference section */
-		02012F5422549974000F08C4 /* Utils.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; name = Utils.swift; path = ../../SKPhotoBrowser/Utils.swift; sourceTree = "<group>"; };
+		026563182255C0720004886E /* SKPhotoBrowserExample-Bridging-Header.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = "SKPhotoBrowserExample-Bridging-Header.h"; sourceTree = "<group>"; };
+		026563192255C0720004886E /* TableViewCell.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = TableViewCell.h; sourceTree = "<group>"; };
+		0265631A2255C0720004886E /* TableViewCell.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = TableViewCell.m; sourceTree = "<group>"; };
+		026563512255C6960004886E /* LTMorphingLabel+Fall.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "LTMorphingLabel+Fall.swift"; sourceTree = "<group>"; };
+		026563522255C6960004886E /* LTMorphingLabel.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = LTMorphingLabel.h; sourceTree = "<group>"; };
+		026563532255C6960004886E /* LTEasing.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = LTEasing.swift; sourceTree = "<group>"; };
+		026563542255C6960004886E /* LTEmitterView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = LTEmitterView.swift; sourceTree = "<group>"; };
+		026563552255C6960004886E /* LTCharacterLimbo.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = LTCharacterLimbo.swift; sourceTree = "<group>"; };
+		026563572255C6960004886E /* Fire.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = Fire.png; sourceTree = "<group>"; };
+		026563582255C6960004886E /* Sparkle.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = Sparkle.png; sourceTree = "<group>"; };
+		026563592255C6960004886E /* Fragment.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = Fragment.png; sourceTree = "<group>"; };
+		0265635A2255C6960004886E /* Smoke.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = Smoke.png; sourceTree = "<group>"; };
+		0265635B2255C6960004886E /* LTCharacterDiffResult.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = LTCharacterDiffResult.swift; sourceTree = "<group>"; };
+		0265635C2255C6960004886E /* LTMorphingLabel+Evaporate.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "LTMorphingLabel+Evaporate.swift"; sourceTree = "<group>"; };
+		0265635D2255C6960004886E /* LTStringDiffResult.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = LTStringDiffResult.swift; sourceTree = "<group>"; };
+		0265635E2255C6960004886E /* LTMorphingLabel+Burn.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "LTMorphingLabel+Burn.swift"; sourceTree = "<group>"; };
+		0265635F2255C6960004886E /* LTMorphingLabel.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = LTMorphingLabel.swift; sourceTree = "<group>"; };
+		026563602255C6960004886E /* LTMorphingLabel+Anvil.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "LTMorphingLabel+Anvil.swift"; sourceTree = "<group>"; };
+		026563612255C6960004886E /* LTMorphingLabel+Sparkle.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "LTMorphingLabel+Sparkle.swift"; sourceTree = "<group>"; };
+		026563622255C6960004886E /* LTMorphingLabel+Pixelate.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "LTMorphingLabel+Pixelate.swift"; sourceTree = "<group>"; };
+		026563632255C6960004886E /* LTMorphingEffect.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = LTMorphingEffect.swift; sourceTree = "<group>"; };
+		026563652255C6970004886E /* SKPhotoBrowser.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SKPhotoBrowser.h; sourceTree = "<group>"; };
+		026563662255C6970004886E /* SKPhotoBrowser.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SKPhotoBrowser.swift; sourceTree = "<group>"; };
+		026563672255C6970004886E /* SKMesurement.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SKMesurement.swift; sourceTree = "<group>"; };
+		026563682255C6970004886E /* SKZoomingScrollView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SKZoomingScrollView.swift; sourceTree = "<group>"; };
+		026563692255C6970004886E /* SKPaginationView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SKPaginationView.swift; sourceTree = "<group>"; };
+		0265636A2255C6970004886E /* SKIndicatorView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SKIndicatorView.swift; sourceTree = "<group>"; };
+		0265636B2255C6970004886E /* SKAnimator.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SKAnimator.swift; sourceTree = "<group>"; };
+		0265636C2255C6970004886E /* SKPhotoBrowserOptions.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SKPhotoBrowserOptions.swift; sourceTree = "<group>"; };
+		0265636D2255C6970004886E /* SKDetectingImageView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SKDetectingImageView.swift; sourceTree = "<group>"; };
+		0265636E2255C6970004886E /* UIApplication+UIWindow.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "UIApplication+UIWindow.swift"; sourceTree = "<group>"; };
+		0265636F2255C6970004886E /* SKPagingScrollView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SKPagingScrollView.swift; sourceTree = "<group>"; };
+		026563702255C6970004886E /* SKDetectingView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SKDetectingView.swift; sourceTree = "<group>"; };
+		026563712255C6970004886E /* SKCache.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SKCache.swift; sourceTree = "<group>"; };
+		026563732255C6970004886E /* UIImage+Rotation.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "UIImage+Rotation.swift"; sourceTree = "<group>"; };
+		026563742255C6970004886E /* UIView+Radius.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "UIView+Radius.swift"; sourceTree = "<group>"; };
+		026563752255C6970004886E /* SKCaptionView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SKCaptionView.swift; sourceTree = "<group>"; };
+		026563762255C6970004886E /* SKLocalPhoto.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SKLocalPhoto.swift; sourceTree = "<group>"; };
+		026563772255C6970004886E /* SKPhoto.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SKPhoto.swift; sourceTree = "<group>"; };
+		026563782255C6970004886E /* SKActionView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SKActionView.swift; sourceTree = "<group>"; };
+		026563792255C6970004886E /* SKToolbar.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SKToolbar.swift; sourceTree = "<group>"; };
+		0265637A2255C6970004886E /* Utils.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Utils.swift; sourceTree = "<group>"; };
+		0265637B2255C6970004886E /* SKPhotoBrowserDelegate.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SKPhotoBrowserDelegate.swift; sourceTree = "<group>"; };
+		0265637C2255C6970004886E /* SKCacheable.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SKCacheable.swift; sourceTree = "<group>"; };
+		0265637D2255C6970004886E /* SKPhotoBrowser.bundle */ = {isa = PBXFileReference; lastKnownFileType = "wrapper.plug-in"; path = SKPhotoBrowser.bundle; sourceTree = "<group>"; };
+		0265637E2255C6970004886E /* VisualEffectView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = VisualEffectView.swift; sourceTree = "<group>"; };
+		0265637F2255C6970004886E /* SKButtons.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SKButtons.swift; sourceTree = "<group>"; };
 		212705881C92C69C00466223 /* FromCameraRollViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = FromCameraRollViewController.swift; sourceTree = "<group>"; };
 		3CB7DBB2A904933FBC55D566 /* Pods-SKPhotoBrowserExample.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-SKPhotoBrowserExample.release.xcconfig"; path = "Pods/Target Support Files/Pods-SKPhotoBrowserExample/Pods-SKPhotoBrowserExample.release.xcconfig"; sourceTree = "<group>"; };
 		6726ABE37DF17134C0BA8EBC /* Pods-SKPhotoBrowserExample.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-SKPhotoBrowserExample.debug.xcconfig"; path = "Pods/Target Support Files/Pods-SKPhotoBrowserExample/Pods-SKPhotoBrowserExample.debug.xcconfig"; sourceTree = "<group>"; };
@@ -83,7 +144,6 @@
 		8909B5611BC792150060A053 /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
 		8909B5641BC792150060A053 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/LaunchScreen.storyboard; sourceTree = "<group>"; };
 		8909B5661BC792150060A053 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
-		8909B56C1BC792570060A053 /* SKPhotoBrowser.xcodeproj */ = {isa = PBXFileReference; lastKnownFileType = "wrapper.pb-project"; name = SKPhotoBrowser.xcodeproj; path = ../SKPhotoBrowser.xcodeproj; sourceTree = "<group>"; };
 		8909B5751BC792DC0060A053 /* image0.jpg */ = {isa = PBXFileReference; lastKnownFileType = image.jpeg; path = image0.jpg; sourceTree = "<group>"; };
 		8909B5761BC792DC0060A053 /* image1.jpg */ = {isa = PBXFileReference; lastKnownFileType = image.jpeg; path = image1.jpg; sourceTree = "<group>"; };
 		8909B5771BC792DC0060A053 /* image10.jpg */ = {isa = PBXFileReference; lastKnownFileType = image.jpeg; path = image10.jpg; sourceTree = "<group>"; };
@@ -105,7 +165,6 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				A6A7B7801C9578E30025AC07 /* SKPhotoBrowser.framework in Frameworks */,
 				EB55C74F2E19BE99A3DD28FF /* Pods_SKPhotoBrowserExample.framework in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -113,14 +172,90 @@
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
+		026563502255C6960004886E /* LTMorphingLabel */ = {
+			isa = PBXGroup;
+			children = (
+				026563512255C6960004886E /* LTMorphingLabel+Fall.swift */,
+				026563522255C6960004886E /* LTMorphingLabel.h */,
+				026563532255C6960004886E /* LTEasing.swift */,
+				026563542255C6960004886E /* LTEmitterView.swift */,
+				026563552255C6960004886E /* LTCharacterLimbo.swift */,
+				026563562255C6960004886E /* Particles */,
+				0265635B2255C6960004886E /* LTCharacterDiffResult.swift */,
+				0265635C2255C6960004886E /* LTMorphingLabel+Evaporate.swift */,
+				0265635D2255C6960004886E /* LTStringDiffResult.swift */,
+				0265635E2255C6960004886E /* LTMorphingLabel+Burn.swift */,
+				0265635F2255C6960004886E /* LTMorphingLabel.swift */,
+				026563602255C6960004886E /* LTMorphingLabel+Anvil.swift */,
+				026563612255C6960004886E /* LTMorphingLabel+Sparkle.swift */,
+				026563622255C6960004886E /* LTMorphingLabel+Pixelate.swift */,
+				026563632255C6960004886E /* LTMorphingEffect.swift */,
+			);
+			path = LTMorphingLabel;
+			sourceTree = "<group>";
+		};
+		026563562255C6960004886E /* Particles */ = {
+			isa = PBXGroup;
+			children = (
+				026563572255C6960004886E /* Fire.png */,
+				026563582255C6960004886E /* Sparkle.png */,
+				026563592255C6960004886E /* Fragment.png */,
+				0265635A2255C6960004886E /* Smoke.png */,
+			);
+			path = Particles;
+			sourceTree = "<group>";
+		};
+		026563642255C6970004886E /* SKPhotoBrowser */ = {
+			isa = PBXGroup;
+			children = (
+				026563652255C6970004886E /* SKPhotoBrowser.h */,
+				026563662255C6970004886E /* SKPhotoBrowser.swift */,
+				026563672255C6970004886E /* SKMesurement.swift */,
+				026563682255C6970004886E /* SKZoomingScrollView.swift */,
+				026563692255C6970004886E /* SKPaginationView.swift */,
+				0265636A2255C6970004886E /* SKIndicatorView.swift */,
+				0265636B2255C6970004886E /* SKAnimator.swift */,
+				0265636C2255C6970004886E /* SKPhotoBrowserOptions.swift */,
+				0265636D2255C6970004886E /* SKDetectingImageView.swift */,
+				0265636E2255C6970004886E /* UIApplication+UIWindow.swift */,
+				0265636F2255C6970004886E /* SKPagingScrollView.swift */,
+				026563702255C6970004886E /* SKDetectingView.swift */,
+				026563712255C6970004886E /* SKCache.swift */,
+				026563722255C6970004886E /* extensions */,
+				026563752255C6970004886E /* SKCaptionView.swift */,
+				026563762255C6970004886E /* SKLocalPhoto.swift */,
+				026563772255C6970004886E /* SKPhoto.swift */,
+				026563782255C6970004886E /* SKActionView.swift */,
+				026563792255C6970004886E /* SKToolbar.swift */,
+				0265637A2255C6970004886E /* Utils.swift */,
+				0265637B2255C6970004886E /* SKPhotoBrowserDelegate.swift */,
+				0265637C2255C6970004886E /* SKCacheable.swift */,
+				0265637D2255C6970004886E /* SKPhotoBrowser.bundle */,
+				0265637E2255C6970004886E /* VisualEffectView.swift */,
+				0265637F2255C6970004886E /* SKButtons.swift */,
+			);
+			path = SKPhotoBrowser;
+			sourceTree = "<group>";
+		};
+		026563722255C6970004886E /* extensions */ = {
+			isa = PBXGroup;
+			children = (
+				026563732255C6970004886E /* UIImage+Rotation.swift */,
+				026563742255C6970004886E /* UIView+Radius.swift */,
+			);
+			path = extensions;
+			sourceTree = "<group>";
+		};
 		8909B54E1BC792150060A053 = {
 			isa = PBXGroup;
 			children = (
-				8909B56C1BC792570060A053 /* SKPhotoBrowser.xcodeproj */,
+				026563192255C0720004886E /* TableViewCell.h */,
+				0265631A2255C0720004886E /* TableViewCell.m */,
 				8909B5591BC792150060A053 /* SKPhotoBrowserExample */,
 				8909B5581BC792150060A053 /* Products */,
 				C646D2C27A5B9CCC003A9BD1 /* Frameworks */,
 				B4C26A60DB67884C16989D8A /* Pods */,
+				026563182255C0720004886E /* SKPhotoBrowserExample-Bridging-Header.h */,
 			);
 			sourceTree = "<group>";
 		};
@@ -135,6 +270,8 @@
 		8909B5591BC792150060A053 /* SKPhotoBrowserExample */ = {
 			isa = PBXGroup;
 			children = (
+				026563502255C6960004886E /* LTMorphingLabel */,
+				026563642255C6970004886E /* SKPhotoBrowser */,
 				8909B55A1BC792150060A053 /* AppDelegate.swift */,
 				A6EBAD761CAFB87A00F80595 /* Controllers */,
 				A6EBAD771CAFB89300F80595 /* UI */,
@@ -142,15 +279,6 @@
 				A6EBAD791CAFB96C00F80595 /* Info */,
 			);
 			path = SKPhotoBrowserExample;
-			sourceTree = "<group>";
-		};
-		8909B56D1BC792570060A053 /* Products */ = {
-			isa = PBXGroup;
-			children = (
-				8909B5711BC792570060A053 /* SKPhotoBrowser.framework */,
-				89FC5DBE1D54A04A00F1BE52 /* SKPhotoBrowserTests.xctest */,
-			);
-			name = Products;
 			sourceTree = "<group>";
 		};
 		8909B5741BC792DC0060A053 /* SampleImages */ = {
@@ -176,7 +304,6 @@
 			isa = PBXGroup;
 			children = (
 				8909B55C1BC792150060A053 /* FromLocalViewController.swift */,
-				02012F5422549974000F08C4 /* Utils.swift */,
 				212705881C92C69C00466223 /* FromCameraRollViewController.swift */,
 				89FC5DBA1D54A04900F1BE52 /* FromWebViewController.swift */,
 			);
@@ -244,7 +371,6 @@
 			buildRules = (
 			);
 			dependencies = (
-				A6A7B7831C9578E30025AC07 /* PBXTargetDependency */,
 			);
 			name = SKPhotoBrowserExample;
 			productName = SKPhotoBrowserExample;
@@ -263,7 +389,7 @@
 					8909B5561BC792150060A053 = {
 						CreatedOnToolsVersion = 7.0;
 						DevelopmentTeam = KR9G98P8SN;
-						LastSwiftMigration = 0800;
+						LastSwiftMigration = 1020;
 					};
 				};
 			};
@@ -279,12 +405,6 @@
 			mainGroup = 8909B54E1BC792150060A053;
 			productRefGroup = 8909B5581BC792150060A053 /* Products */;
 			projectDirPath = "";
-			projectReferences = (
-				{
-					ProductGroup = 8909B56D1BC792570060A053 /* Products */;
-					ProjectRef = 8909B56C1BC792570060A053 /* SKPhotoBrowser.xcodeproj */;
-				},
-			);
 			projectRoot = "";
 			targets = (
 				8909B5561BC792150060A053 /* SKPhotoBrowserExample */,
@@ -292,39 +412,27 @@
 		};
 /* End PBXProject section */
 
-/* Begin PBXReferenceProxy section */
-		8909B5711BC792570060A053 /* SKPhotoBrowser.framework */ = {
-			isa = PBXReferenceProxy;
-			fileType = wrapper.framework;
-			path = SKPhotoBrowser.framework;
-			remoteRef = 8909B5701BC792570060A053 /* PBXContainerItemProxy */;
-			sourceTree = BUILT_PRODUCTS_DIR;
-		};
-		89FC5DBE1D54A04A00F1BE52 /* SKPhotoBrowserTests.xctest */ = {
-			isa = PBXReferenceProxy;
-			fileType = wrapper.cfbundle;
-			path = SKPhotoBrowserTests.xctest;
-			remoteRef = 89FC5DBD1D54A04A00F1BE52 /* PBXContainerItemProxy */;
-			sourceTree = BUILT_PRODUCTS_DIR;
-		};
-/* End PBXReferenceProxy section */
-
 /* Begin PBXResourcesBuildPhase section */
 		8909B5551BC792150060A053 /* Resources */ = {
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
 				8909B58B1BC792DC0060A053 /* image8.jpg in Resources */,
+				026563852255C6970004886E /* Fire.png in Resources */,
 				8909B5861BC792DC0060A053 /* image3.jpg in Resources */,
 				8909B5811BC792DC0060A053 /* image0.jpg in Resources */,
 				8909B58A1BC792DC0060A053 /* image7.jpg in Resources */,
 				8909B5821BC792DC0060A053 /* image1.jpg in Resources */,
 				8909B5831BC792DC0060A053 /* image10.jpg in Resources */,
+				026563872255C6970004886E /* Fragment.png in Resources */,
 				8909B58C1BC792DC0060A053 /* image9.jpg in Resources */,
+				026563A82255C6970004886E /* SKPhotoBrowser.bundle in Resources */,
+				026563862255C6970004886E /* Sparkle.png in Resources */,
 				8909B5651BC792150060A053 /* LaunchScreen.storyboard in Resources */,
 				8909B5621BC792150060A053 /* Assets.xcassets in Resources */,
 				8909B5891BC792DC0060A053 /* image6.jpg in Resources */,
 				8909B5871BC792DC0060A053 /* image4.jpg in Resources */,
+				026563882255C6970004886E /* Smoke.png in Resources */,
 				8909B5881BC792DC0060A053 /* image5.jpg in Resources */,
 				8909B5841BC792DC0060A053 /* image12.jpg in Resources */,
 				8909B5851BC792DC0060A053 /* image2.jpg in Resources */,
@@ -348,6 +456,7 @@
 				"${BUILT_PRODUCTS_DIR}/PINRemoteImage/PINRemoteImage.framework",
 				"${BUILT_PRODUCTS_DIR}/SDWebImage/SDWebImage.framework",
 				"${BUILT_PRODUCTS_DIR}/Texture/AsyncDisplayKit.framework",
+				"${BUILT_PRODUCTS_DIR}/ZCAnimatedLabel/ZCAnimatedLabel.framework",
 			);
 			name = "[CP] Embed Pods Frameworks";
 			outputPaths = (
@@ -357,6 +466,7 @@
 				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/PINRemoteImage.framework",
 				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/SDWebImage.framework",
 				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/AsyncDisplayKit.framework",
+				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/ZCAnimatedLabel.framework",
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 			shellPath = /bin/sh;
@@ -388,23 +498,52 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				02012F5522549975000F08C4 /* Utils.swift in Sources */,
+				026563982255C6970004886E /* SKPhotoBrowserOptions.swift in Sources */,
+				0265639A2255C6970004886E /* UIApplication+UIWindow.swift in Sources */,
+				026563962255C6970004886E /* SKIndicatorView.swift in Sources */,
+				026563A62255C6970004886E /* SKPhotoBrowserDelegate.swift in Sources */,
+				026563822255C6970004886E /* LTEasing.swift in Sources */,
+				0265631B2255C0720004886E /* TableViewCell.m in Sources */,
+				026563992255C6970004886E /* SKDetectingImageView.swift in Sources */,
+				026563AA2255C6970004886E /* SKButtons.swift in Sources */,
+				026563902255C6970004886E /* LTMorphingLabel+Pixelate.swift in Sources */,
+				026563922255C6970004886E /* SKPhotoBrowser.swift in Sources */,
+				026563932255C6970004886E /* SKMesurement.swift in Sources */,
+				0265638B2255C6970004886E /* LTStringDiffResult.swift in Sources */,
+				0265639E2255C6970004886E /* UIImage+Rotation.swift in Sources */,
+				026563942255C6970004886E /* SKZoomingScrollView.swift in Sources */,
+				026563A92255C6970004886E /* VisualEffectView.swift in Sources */,
+				026563A02255C6970004886E /* SKCaptionView.swift in Sources */,
+				026563812255C6970004886E /* LTMorphingLabel+Fall.swift in Sources */,
+				026563952255C6970004886E /* SKPaginationView.swift in Sources */,
+				0265639B2255C6970004886E /* SKPagingScrollView.swift in Sources */,
+				0265639D2255C6970004886E /* SKCache.swift in Sources */,
+				026563A52255C6970004886E /* Utils.swift in Sources */,
+				026563892255C6970004886E /* LTCharacterDiffResult.swift in Sources */,
+				026563832255C6970004886E /* LTEmitterView.swift in Sources */,
+				026563972255C6970004886E /* SKAnimator.swift in Sources */,
+				026563A32255C6970004886E /* SKActionView.swift in Sources */,
+				0265639C2255C6970004886E /* SKDetectingView.swift in Sources */,
 				212705891C92C69C00466223 /* FromCameraRollViewController.swift in Sources */,
 				8909B55D1BC792150060A053 /* FromLocalViewController.swift in Sources */,
+				026563A72255C6970004886E /* SKCacheable.swift in Sources */,
+				0265638D2255C6970004886E /* LTMorphingLabel.swift in Sources */,
+				0265638F2255C6970004886E /* LTMorphingLabel+Sparkle.swift in Sources */,
+				026563A22255C6970004886E /* SKPhoto.swift in Sources */,
 				8909B55B1BC792150060A053 /* AppDelegate.swift in Sources */,
+				026563A12255C6970004886E /* SKLocalPhoto.swift in Sources */,
 				89FC5DBB1D54A04900F1BE52 /* FromWebViewController.swift in Sources */,
+				0265639F2255C6970004886E /* UIView+Radius.swift in Sources */,
+				026563A42255C6970004886E /* SKToolbar.swift in Sources */,
+				026563842255C6970004886E /* LTCharacterLimbo.swift in Sources */,
+				026563912255C6970004886E /* LTMorphingEffect.swift in Sources */,
+				0265638C2255C6970004886E /* LTMorphingLabel+Burn.swift in Sources */,
+				0265638A2255C6970004886E /* LTMorphingLabel+Evaporate.swift in Sources */,
+				0265638E2255C6970004886E /* LTMorphingLabel+Anvil.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
 /* End PBXSourcesBuildPhase section */
-
-/* Begin PBXTargetDependency section */
-		A6A7B7831C9578E30025AC07 /* PBXTargetDependency */ = {
-			isa = PBXTargetDependency;
-			name = SKPhotoBrowser;
-			targetProxy = A6A7B7821C9578E30025AC07 /* PBXContainerItemProxy */;
-		};
-/* End PBXTargetDependency section */
 
 /* Begin PBXVariantGroup section */
 		8909B55E1BC792150060A053 /* Main.storyboard */ = {
@@ -520,6 +659,7 @@
 			buildSettings = {
 				ALWAYS_EMBED_SWIFT_STANDARD_LIBRARIES = YES;
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+				CLANG_ENABLE_MODULES = YES;
 				CODE_SIGN_IDENTITY = "iPhone Developer";
 				DEVELOPMENT_TEAM = KR9G98P8SN;
 				INFOPLIST_FILE = SKPhotoBrowserExample/Info.plist;
@@ -527,6 +667,8 @@
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
 				PRODUCT_BUNDLE_IDENTIFIER = com.keishi.suzuki.aSKPhotoBrowserExample;
 				PRODUCT_NAME = "$(TARGET_NAME)";
+				SWIFT_OBJC_BRIDGING_HEADER = "SKPhotoBrowserExample-Bridging-Header.h";
+				SWIFT_OPTIMIZATION_LEVEL = "-Onone";
 				SWIFT_VERSION = 4.2;
 			};
 			name = Debug;
@@ -537,6 +679,7 @@
 			buildSettings = {
 				ALWAYS_EMBED_SWIFT_STANDARD_LIBRARIES = YES;
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+				CLANG_ENABLE_MODULES = YES;
 				CODE_SIGN_IDENTITY = "iPhone Developer";
 				DEVELOPMENT_TEAM = KR9G98P8SN;
 				INFOPLIST_FILE = SKPhotoBrowserExample/Info.plist;
@@ -544,6 +687,7 @@
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
 				PRODUCT_BUNDLE_IDENTIFIER = com.keishi.suzuki.aSKPhotoBrowserExample;
 				PRODUCT_NAME = "$(TARGET_NAME)";
+				SWIFT_OBJC_BRIDGING_HEADER = "SKPhotoBrowserExample-Bridging-Header.h";
 				SWIFT_VERSION = 4.2;
 			};
 			name = Release;

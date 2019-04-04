@@ -5,4 +5,5 @@ target "SKPhotoBrowserExample" do
     pod 'SDWebImage', '~>3.8'
     pod 'Texture', '~> 2.8'
     pod 'Texture/IGListKit'
+    pod 'ZCAnimatedLabel'
 end

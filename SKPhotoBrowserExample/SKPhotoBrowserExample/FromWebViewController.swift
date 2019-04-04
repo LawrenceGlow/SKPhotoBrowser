@@ -7,7 +7,7 @@
 //
 
 import UIKit
-import SKPhotoBrowser
+
 import SDWebImage
 
 class FromWebViewController: UIViewController, SKPhotoBrowserDelegate {

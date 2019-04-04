@@ -8,7 +8,7 @@
 
 import UIKit
 import Photos
-import SKPhotoBrowser
+
 
 class FromCameraRollViewController: UIViewController, SKPhotoBrowserDelegate, UICollectionViewDataSource, UICollectionViewDelegate {
 

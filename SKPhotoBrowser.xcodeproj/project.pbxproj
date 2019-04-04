@@ -18,7 +18,6 @@
 		02012F8E225502A2000F08C4 /* Sparkle.png in Resources */ = {isa = PBXBuildFile; fileRef = 02012F7A225502A2000F08C4 /* Sparkle.png */; };
 		02012F8F225502A2000F08C4 /* Fragment.png in Resources */ = {isa = PBXBuildFile; fileRef = 02012F7B225502A2000F08C4 /* Fragment.png */; };
 		02012F90225502A2000F08C4 /* Smoke.png in Resources */ = {isa = PBXBuildFile; fileRef = 02012F7C225502A2000F08C4 /* Smoke.png */; };
-		02012F91225502A2000F08C4 /* tvOS-Info.plist in Resources */ = {isa = PBXBuildFile; fileRef = 02012F7D225502A2000F08C4 /* tvOS-Info.plist */; };
 		02012F92225502A2000F08C4 /* LTCharacterDiffResult.swift in Sources */ = {isa = PBXBuildFile; fileRef = 02012F7E225502A2000F08C4 /* LTCharacterDiffResult.swift */; };
 		02012F93225502A2000F08C4 /* LTMorphingLabel+Evaporate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 02012F7F225502A2000F08C4 /* LTMorphingLabel+Evaporate.swift */; };
 		02012F94225502A2000F08C4 /* LTStringDiffResult.swift in Sources */ = {isa = PBXBuildFile; fileRef = 02012F80225502A2000F08C4 /* LTStringDiffResult.swift */; };
@@ -28,7 +27,6 @@
 		02012F98225502A2000F08C4 /* LTMorphingLabel+Sparkle.swift in Sources */ = {isa = PBXBuildFile; fileRef = 02012F84225502A2000F08C4 /* LTMorphingLabel+Sparkle.swift */; };
 		02012F99225502A2000F08C4 /* LTMorphingLabel+Pixelate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 02012F85225502A2000F08C4 /* LTMorphingLabel+Pixelate.swift */; };
 		02012F9A225502A2000F08C4 /* LTMorphingEffect.swift in Sources */ = {isa = PBXBuildFile; fileRef = 02012F86225502A2000F08C4 /* LTMorphingEffect.swift */; };
-		02012F9B225502A2000F08C4 /* Info.plist in Resources */ = {isa = PBXBuildFile; fileRef = 02012F87225502A2000F08C4 /* Info.plist */; };
 		210E53ED1C986D3A008DD5E3 /* UIView+Radius.swift in Sources */ = {isa = PBXBuildFile; fileRef = 210E53EC1C986D3A008DD5E3 /* UIView+Radius.swift */; };
 		210E53EF1C986D57008DD5E3 /* UIImage+Rotation.swift in Sources */ = {isa = PBXBuildFile; fileRef = 210E53EE1C986D57008DD5E3 /* UIImage+Rotation.swift */; };
 		26C97AD51D0EB6870039F6CB /* SKCache.swift in Sources */ = {isa = PBXBuildFile; fileRef = 26C97AD41D0EB6870039F6CB /* SKCache.swift */; };
@@ -80,7 +78,6 @@
 		02012F7A225502A2000F08C4 /* Sparkle.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = Sparkle.png; sourceTree = "<group>"; };
 		02012F7B225502A2000F08C4 /* Fragment.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = Fragment.png; sourceTree = "<group>"; };
 		02012F7C225502A2000F08C4 /* Smoke.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = Smoke.png; sourceTree = "<group>"; };
-		02012F7D225502A2000F08C4 /* tvOS-Info.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = "tvOS-Info.plist"; sourceTree = "<group>"; };
 		02012F7E225502A2000F08C4 /* LTCharacterDiffResult.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = LTCharacterDiffResult.swift; sourceTree = "<group>"; };
 		02012F7F225502A2000F08C4 /* LTMorphingLabel+Evaporate.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "LTMorphingLabel+Evaporate.swift"; sourceTree = "<group>"; };
 		02012F80225502A2000F08C4 /* LTStringDiffResult.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = LTStringDiffResult.swift; sourceTree = "<group>"; };
@@ -90,7 +87,6 @@
 		02012F84225502A2000F08C4 /* LTMorphingLabel+Sparkle.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "LTMorphingLabel+Sparkle.swift"; sourceTree = "<group>"; };
 		02012F85225502A2000F08C4 /* LTMorphingLabel+Pixelate.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "LTMorphingLabel+Pixelate.swift"; sourceTree = "<group>"; };
 		02012F86225502A2000F08C4 /* LTMorphingEffect.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = LTMorphingEffect.swift; sourceTree = "<group>"; };
-		02012F87225502A2000F08C4 /* Info.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		210E53EC1C986D3A008DD5E3 /* UIView+Radius.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = "UIView+Radius.swift"; path = "extensions/UIView+Radius.swift"; sourceTree = "<group>"; };
 		210E53EE1C986D57008DD5E3 /* UIImage+Rotation.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = "UIImage+Rotation.swift"; path = "extensions/UIImage+Rotation.swift"; sourceTree = "<group>"; };
 		26C97AD41D0EB6870039F6CB /* SKCache.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SKCache.swift; sourceTree = "<group>"; };
@@ -151,7 +147,6 @@
 				02012F76225502A2000F08C4 /* LTEmitterView.swift */,
 				02012F77225502A2000F08C4 /* LTCharacterLimbo.swift */,
 				02012F78225502A2000F08C4 /* Particles */,
-				02012F7D225502A2000F08C4 /* tvOS-Info.plist */,
 				02012F7E225502A2000F08C4 /* LTCharacterDiffResult.swift */,
 				02012F7F225502A2000F08C4 /* LTMorphingLabel+Evaporate.swift */,
 				02012F80225502A2000F08C4 /* LTStringDiffResult.swift */,
@@ -161,9 +156,9 @@
 				02012F84225502A2000F08C4 /* LTMorphingLabel+Sparkle.swift */,
 				02012F85225502A2000F08C4 /* LTMorphingLabel+Pixelate.swift */,
 				02012F86225502A2000F08C4 /* LTMorphingEffect.swift */,
-				02012F87225502A2000F08C4 /* Info.plist */,
 			);
-			path = LTMorphingLabel;
+			name = LTMorphingLabel;
+			path = SKPhotoBrowserExample/SKPhotoBrowserExample/LTMorphingLabel;
 			sourceTree = "<group>";
 		};
 		02012F78225502A2000F08C4 /* Particles */ = {
@@ -235,7 +230,8 @@
 				210E53EB1C986D1C008DD5E3 /* extensions */,
 				8909B54C1BC7916E0060A053 /* SKPhotoBrowser.bundle */,
 			);
-			path = SKPhotoBrowser;
+			name = SKPhotoBrowser;
+			path = SKPhotoBrowserExample/SKPhotoBrowserExample/SKPhotoBrowser;
 			sourceTree = "<group>";
 		};
 		A64B89341CB04222000071B9 /* SKPhotoBrowserTests */ = {
@@ -344,13 +340,11 @@
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				02012F91225502A2000F08C4 /* tvOS-Info.plist in Resources */,
 				02012F8E225502A2000F08C4 /* Sparkle.png in Resources */,
 				8909B54D1BC7916E0060A053 /* SKPhotoBrowser.bundle in Resources */,
 				02012F8D225502A2000F08C4 /* Fire.png in Resources */,
 				02012F8F225502A2000F08C4 /* Fragment.png in Resources */,
 				02012F90225502A2000F08C4 /* Smoke.png in Resources */,
-				02012F9B225502A2000F08C4 /* Info.plist in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

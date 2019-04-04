@@ -7,6 +7,7 @@
 //
 
 import UIKit
+import ZCAnimatedLabel
 
 class SKActionView: UIView {
     var style: SKPhotoBrowser.BrowserStyle!
@@ -16,7 +17,8 @@ class SKActionView: UIView {
     var closeButton: UIButton!
     var countLabel: UILabel!
     var moreButton: UIButton!
-    var captionLabel: LTMorphingLabel!
+    var imageView: UIImageView!
+    var captionLabel: ZCAnimatedLabel!
     var shareButton: UIButton!
     
     private let formatter: DateFormatter = {
@@ -77,12 +79,22 @@ class SKActionView: UIView {
         
         topBlurView.contentView.addSubview(moreButton)
         
-        captionLabel = LTMorphingLabel()
-        captionLabel.font = UIFont.systemFont(ofSize: 14)
-        captionLabel.textColor = .white
-        captionLabel.numberOfLines = 2
-        captionLabel.lineBreakMode = .byWordWrapping
-        captionLabel.textAlignment = .center
+        imageView = UIImageView()
+        imageView.backgroundColor = .orange
+        bottomBlurView.contentView.addSubview(imageView)
+        
+        captionLabel = ZCAnimatedLabel()
+//        captionLabel.clipsToBounds = true
+//        captionLabel.layerBased = true
+        captionLabel.layoutTool.groupType = .char
+        captionLabel.layoutTool.numberOfLines = 2
+        captionLabel.animationDuration = 0.25
+        captionLabel.animationDelay = 0.02
+//        captionLabel.font = UIFont.systemFont(ofSize: 14)
+//        captionLabel.textColor = .white
+//        captionLabel.numberOfLines = 2
+//        captionLabel.lineBreakMode = .byWordWrapping
+//        captionLabel.textAlignment = .left
         bottomBlurView.contentView.addSubview(captionLabel)
         
         shareButton = UIButton(type: .custom)
@@ -90,13 +102,18 @@ class SKActionView: UIView {
         shareButton.addTarget(browser, action: #selector(SKPhotoBrowser.shareButtonPressed), for: .touchUpInside)
         bottomBlurView.contentView.addSubview(shareButton)
         
-        update(browser.currentPageIndex)
+        DispatchQueue.main.asyncAfter(deadline: .now()+0.33) {
+            self.update(browser.currentPageIndex)
+        }
     }
     
     override func hitTest(_ point: CGPoint, with event: UIEvent?) -> UIView? {
         if let view = super.hitTest(point, with: event) {
-            if closeButton.frame.contains(point) || moreButton.frame.contains(point) ||
-                shareButton.frame.contains(point) {
+            if closeButton.frame.contains(point) || moreButton.frame.contains(point) {
+                return view
+            }
+            let bottomPoint = convert(point, to: bottomBlurView)
+            if shareButton.frame.contains(bottomPoint) {
                 return view
             }
             return nil
@@ -132,7 +149,19 @@ class SKActionView: UIView {
             width: 100,
             height: 44
         )
-        setNeedsDisplay()
+        imageView.frame = CGRect(
+            x: UIApplication.safeInsets.left+16,
+            y: 8,
+            width: 30,
+            height: 30
+        )
+        captionLabel.frame = CGRect(
+            x: UIApplication.safeInsets.left+16+imageView.frame.width+8,
+            y: 8,
+            width: bottomBlurView.contentView.frame.width-imageView.frame.width-32-8,
+            height: bottomBlurView.contentView.frame.height-UIApplication.safeInsets.bottom-shareButton.frame.height-8
+        )
+//        setNeedsDisplay()
     }
     
     func update(_ currentPageIndex: Int, date: Date? = Date()) {
@@ -162,6 +191,10 @@ class SKActionView: UIView {
         } else {
             countLabel.text = count
         }
+        
+        let caption = createCaption(currentPageIndex)
+        captionLabel.attributedString = formatted(caption)
+        captionLabel.startAppearAnimation()
     }
     
     func animate(hidden: Bool) {
@@ -171,10 +204,13 @@ class SKActionView: UIView {
         UIView.animate(withDuration: 0.35, animations: { () -> Void in
             self.closeButton.alpha = alpha
             self.moreButton.alpha = alpha
+            self.countLabel.alpha = alpha
             self.topBlurView.blurRadius = hidden ? 0 : 10
             self.topBlurView.colorTint = hidden ? .clear : .black
             
             self.shareButton.alpha = alpha
+            self.imageView.alpha = alpha
+            self.captionLabel.alpha = alpha
             self.bottomBlurView.blurRadius = hidden ? 0 : 10
             self.bottomBlurView.colorTint = hidden ? .clear : .black
         }, completion: nil)
@@ -189,5 +225,38 @@ class SKActionView: UIView {
         browser.delegate?.removePhoto?(browser, index: browser.currentPageIndex) { [weak self] in
             self?.browser?.deleteImage()
         }
+    }
+}
+
+extension SKActionView {
+    func createCaption(_ index: Int) -> String {
+        if let delegate = self.browser?.delegate,
+            let caption = delegate.captionForPhoto?(at: index) {
+            return caption
+        }
+        guard let photo = browser?.photoAtIndex(index),
+            let caption = photo.caption else {
+            return ""
+        }
+        return caption
+    }
+    
+    func formatted(_ text: String) -> NSAttributedString {
+        let style = NSParagraphStyle.style(lineHeight: 15, .left)
+//        let image = NSTextAttachment()
+//        image.image = UIImage(named: "browser_close_button")
+////        image.bounds = CGRect(x: 0, y: 0, width: 30, height: 30)
+//        let attachment = NSAttributedString(attachment: image)
+//        let attr = NSMutableAttributedString(attributedString: attachment)
+        
+        let text = NSMutableAttributedString(string: text, attributes: [
+            .font: UIFont.boldSystemFont(ofSize: 14),
+            .paragraphStyle: style,
+            .foregroundColor: UIColor.white
+            ]
+        )
+        
+//        attr.append(text)
+        return text
     }
 }

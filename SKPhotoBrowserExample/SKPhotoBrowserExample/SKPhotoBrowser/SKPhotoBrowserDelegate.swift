@@ -86,5 +86,12 @@ import Foundation
      - Parameter index: the index of the photo
      */
     @objc optional func captionViewForPhotoAtIndex(index: Int) -> SKCaptionView?
+    
+    /**
+     Allows  the delegate to create its own caption
+     
+     - Parameter index: the index of the photo
+     */
+    @objc optional func captionForPhoto(at index: Int) -> String?
 }
 

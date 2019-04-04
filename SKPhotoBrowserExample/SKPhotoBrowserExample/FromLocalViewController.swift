@@ -7,7 +7,7 @@
 //
 
 import UIKit
-import SKPhotoBrowser
+
 
 class FromLocalViewController: UIViewController, UICollectionViewDataSource, UICollectionViewDelegate, SKPhotoBrowserDelegate {
     @IBOutlet weak var collectionView: UICollectionView!

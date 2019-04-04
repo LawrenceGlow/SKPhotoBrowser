@@ -57,3 +57,12 @@ public func generateTintedImage(image: UIImage?, color: UIColor, backgroundColor
     
     return tintedImage
 }
+
+extension NSParagraphStyle {
+    static func style(lineHeight: CGFloat, _ alignment: NSTextAlignment = .center) -> NSParagraphStyle {
+        let paragraph = NSMutableParagraphStyle()
+        paragraph.alignment = alignment
+        paragraph.minimumLineHeight = lineHeight
+        return paragraph
+    }
+}
