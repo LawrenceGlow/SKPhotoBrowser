@@ -292,8 +292,17 @@ extension LTMorphingLabel {
     // Could be enhanced by kerning text:
     // http://stackoverflow.com/questions/21443625/core-text-calculate-letter-frame-in-ios
     func rectsOfEachCharacter(_ textToDraw: String, withFont font: UIFont) -> [CGRect] {
-        var charRects = [CGRect]()
-        var leftOffset: CGFloat = 0.0
+//        var charRects = [CGRect]()
+//        var leftOffset: CGFloat = 0.0
+        
+        let len = textToDraw.count
+        let characters = UnsafeMutablePointer<UniChar>.allocate(capacity: len)
+        CFStringGetCharacters(textToDraw as CFString, CFRange(location: 0, length: len), characters)
+        let glyphs = UnsafeMutablePointer<CGGlyph>.allocate(capacity: len)
+        CTFontGetGlyphsForCharacters(font, characters, glyphs, len)
+        
+        let characterRects = UnsafeMutablePointer<CGRect>.allocate(capacity: len)
+        CTFontGetBoundingRectsForGlyphs(font, .default, glyphs, characterRects, len)
         
         let attributed = NSAttributedString(string: textToDraw, attributes: [
             .font: font,
@@ -301,27 +310,31 @@ extension LTMorphingLabel {
 //            .paragraphStyle: NSParagraphStyle.style(lineHeight: <#T##CGFloat#>, <#T##alignment: NSTextAlignment##NSTextAlignment#>)
             ]
         )
+        let fitRange = UnsafeMutablePointer<CFRange>.allocate(capacity: 1)
         let frameSetter = CTFramesetterCreateWithAttributedString(attributed)
         let suggestedSize = CTFramesetterSuggestFrameSizeWithConstraints(
             frameSetter,
             CFRange(location: 0, length: attributed.string.count),
             nil,
-            CGSize(width: frame.width, height: frame.height),
-            nil
+            CGSize(width: CGFloat.greatestFiniteMagnitude, height: CGFloat.greatestFiniteMagnitude),
+            fitRange
         )
-        let framePath = CGPath(rect: CGRect(x: 0, y: 0, width: suggestedSize.width, height: suggestedSize.height), transform: nil)
+        let frameRect = CGRect(x: 0, y: 0, width: suggestedSize.width, height: suggestedSize.height)
+        let framePath = CGPath(rect: frameRect, transform: nil)
         let ctFrame = CTFramesetterCreateFrame(frameSetter, CFRange(location: 0, length: attributed.string.count), framePath, nil)
         let lines = CTFrameGetLines(ctFrame) as NSArray
         let lineCount = lines.count
-        var lineOrigins = UnsafeMutablePointer<CGPoint>.allocate(capacity: lineCount)
-        var lineFrames = UnsafeMutablePointer<CGRect>.allocate(capacity: lineCount)
+        let lineOrigins = UnsafeMutablePointer<CGPoint>.allocate(capacity: lineCount)
+        let lineFrames = UnsafeMutablePointer<CGRect>.allocate(capacity: lineCount)
         CTFrameGetLineOrigins(ctFrame, CFRange(location: 0, length: 0), lineOrigins)
         
-        var startOffsetY: CGFloat = 0
+//        var startOffsetY: CGFloat = 0
         // Loop throught the lines
         for i in 0..<lineCount {
             let line = lines[i] as! CTLine
             let lineRange = CTLineGetStringRange(line)
+            let lineStartIndex = lineRange.location
+            let lineEndIndex = lineStartIndex+lineRange.length
             let lineOrigin = lineOrigins[i]
             
             let ascent = UnsafeMutablePointer<CGFloat>.allocate(capacity: 1)
@@ -334,67 +347,66 @@ extension LTMorphingLabel {
             let neighborLineY: CGFloat = i > 0 ? lineOrigins[i - 1].y : (lineCount - 1 > i ? lineOrigins[i+1].y : 0.0)
             let lineHeight: CGFloat = ceil(useRealHeight ? abs(neighborLineY - lineOrigin.y) : ascent[0] + descent[0] + leading[0])
             
-            lineFrames[i].origin = lineOrigin;
+            lineFrames[i].origin = lineOrigin
             lineFrames[i].size = CGSize(width: lineWidth, height: lineHeight)
-            let lineString = textToDraw.substring(with: lineRange.location..<lineRange.location+lineRange.length)
-//            print(lineString)
-            startOffsetY += lineHeight;
-        }
-        
-        charHeight = "Leg".size(withAttributes: [.font: font]).height
-        
-        let topOffset = (bounds.size.height - charHeight) / 2.0
-
-        var index = -1
-        var line: CTLine?
-        if lines.count > 1 {
-            line = lines[1] as! CTLine
-        }
-//        let lineRange = CTLineGetStringRange(line)
-        for char in textToDraw {
-            index += 1
             
-            var origin = CGPoint(x: leftOffset, y: 0)
-            if let line = line {
-                let lineRange = CTLineGetStringRange(line)
-                if index == lineRange.location {
-                    leftOffset = 0
-                }
-                if index >= lineRange.location {
-                    origin = CGPoint(x: leftOffset, y: charHeight)
-                }
+            for ic in lineStartIndex..<lineEndIndex {
+                let startOffset = CTLineGetOffsetForStringIndex(line, ic, nil)
+                let rect = characterRects[ic]
+                characterRects[ic] = rect.offsetBy(dx: startOffset, dy: lineOrigin.y)
             }
-            
-            let charSize = String(char).size(withAttributes: [.font: font])
-            charRects.append(
-                CGRect(
-                    origin: origin,
-                    size: charSize
-                )
-            )
-            leftOffset += charSize.width
         }
+        let rects = UnsafeMutableBufferPointer<CGRect>(start: characterRects, count: len)
+        return Array(rects)
+//        charHeight = "Leg".size(withAttributes: [.font: font]).height
+//
+//        let topOffset = (bounds.size.height - charHeight) / 2.0
+
+//        for char in textToDraw {
+//            index += 1
+//
+//            var origin = CGPoint(x: leftOffset, y: 0)
+//            if let line = line {
+//                let lineRange = CTLineGetStringRange(line)
+//                if index == lineRange.location {
+//                    leftOffset = 0
+//                }
+//                if index >= lineRange.location {
+//                    origin = CGPoint(x: leftOffset, y: charHeight)
+//                }
+//            }
+//
+//            let charSize = String(char).size(withAttributes: [.font: font])
+//            charRects.append(
+//                CGRect(
+//                    origin: origin,
+//                    size: charSize
+//                )
+//            )
+//            leftOffset += charSize.width
+//        }
         
-        totalWidth = Float(leftOffset)
+//        totalWidth = Float(leftOffset)
         
-        var stringLeftOffSet: CGFloat = 0.0
+//        var stringLeftOffSet: CGFloat = 0.0
         
-        switch textAlignment {
-        case .center:
-            stringLeftOffSet = CGFloat((Float(bounds.size.width) - totalWidth) / 2.0)
-        case .right:
-            stringLeftOffSet = CGFloat(Float(bounds.size.width) - totalWidth)
-        default:
-            ()
-        }
+//        switch textAlignment {
+//        case .center:
+//            stringLeftOffSet = CGFloat((Float(bounds.size.width) - totalWidth) / 2.0)
+//        case .right:
+//            stringLeftOffSet = CGFloat(Float(bounds.size.width) - totalWidth)
+//        default:
+//            ()
+//        }
         
-        var offsetedCharRects = [CGRect]()
+//        var offsetedCharRects = [CGRect]()
+//
+//        for r in charRects {
+//            offsetedCharRects.append(r.offsetBy(dx: stringLeftOffSet, dy: 0.0))
+//        }
         
-        for r in charRects {
-            offsetedCharRects.append(r.offsetBy(dx: stringLeftOffSet, dy: 0.0))
-        }
+//        return offsetedCharRects
         
-        return offsetedCharRects
     }
     
     func limboOfOriginalCharacter(
@@ -614,6 +626,11 @@ extension LTMorphingLabel {
 
 }
 
+extension LTMorphingLabel {
+    func rects(for attributedString: NSAttributedString) -> [CGRect] {
+        return []
+    }
+}
 
 extension String {
     func index(from: Int) -> Index {
