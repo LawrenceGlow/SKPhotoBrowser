@@ -7,7 +7,6 @@
 //
 
 import UIKit
-import ZCAnimatedLabel
 
 class SKActionView: UIView {
     var style: SKPhotoBrowser.BrowserStyle!
@@ -18,7 +17,7 @@ class SKActionView: UIView {
     var countLabel: UILabel!
     var moreButton: UIButton!
     var imageView: UIImageView!
-    var captionLabel: ZCAnimatedLabel!
+    var captionLabel: LTMorphingLabel!
     var shareButton: UIButton!
     
     private let formatter: DateFormatter = {
@@ -83,18 +82,17 @@ class SKActionView: UIView {
         imageView.backgroundColor = .orange
         bottomBlurView.contentView.addSubview(imageView)
         
-        captionLabel = ZCAnimatedLabel()
+        captionLabel = LTMorphingLabel()
 //        captionLabel.clipsToBounds = true
 //        captionLabel.layerBased = true
-        captionLabel.layoutTool.groupType = .char
-        captionLabel.layoutTool.numberOfLines = 2
-        captionLabel.animationDuration = 0.25
-        captionLabel.animationDelay = 0.02
-//        captionLabel.font = UIFont.systemFont(ofSize: 14)
-//        captionLabel.textColor = .white
+//        captionLabel.layoutTool.groupType = .char
+//        captionLabel.animationDuration = 0.25
+//        captionLabel.animationDelay = 0.02
+        captionLabel.font = UIFont.systemFont(ofSize: 14)
+        captionLabel.textColor = .white
 //        captionLabel.numberOfLines = 2
-//        captionLabel.lineBreakMode = .byWordWrapping
-//        captionLabel.textAlignment = .left
+        captionLabel.lineBreakMode = .byTruncatingTail
+        captionLabel.textAlignment = .left
         bottomBlurView.contentView.addSubview(captionLabel)
         
         shareButton = UIButton(type: .custom)
@@ -193,8 +191,9 @@ class SKActionView: UIView {
         }
         
         let caption = createCaption(currentPageIndex)
-        captionLabel.attributedString = formatted(caption)
-        captionLabel.startAppearAnimation()
+        captionLabel.text = caption
+//        captionLabel.attributedString = formatted(caption)
+//        captionLabel.startAppearAnimation()
     }
     
     func animate(hidden: Bool) {

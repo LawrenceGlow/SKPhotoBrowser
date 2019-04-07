@@ -28,6 +28,7 @@
 import Foundation
 import UIKit
 import QuartzCore
+import CoreText
 
 private func < <T : Comparable>(lhs: T?, rhs: T?) -> Bool {
   switch (lhs, rhs) {
@@ -294,18 +295,80 @@ extension LTMorphingLabel {
         var charRects = [CGRect]()
         var leftOffset: CGFloat = 0.0
         
+        let attributed = NSAttributedString(string: textToDraw, attributes: [
+            .font: font,
+            .foregroundColor: UIColor.white
+//            .paragraphStyle: NSParagraphStyle.style(lineHeight: <#T##CGFloat#>, <#T##alignment: NSTextAlignment##NSTextAlignment#>)
+            ]
+        )
+        let frameSetter = CTFramesetterCreateWithAttributedString(attributed)
+        let suggestedSize = CTFramesetterSuggestFrameSizeWithConstraints(
+            frameSetter,
+            CFRange(location: 0, length: attributed.string.count),
+            nil,
+            CGSize(width: frame.width, height: frame.height),
+            nil
+        )
+        let framePath = CGPath(rect: CGRect(x: 0, y: 0, width: suggestedSize.width, height: suggestedSize.height), transform: nil)
+        let ctFrame = CTFramesetterCreateFrame(frameSetter, CFRange(location: 0, length: attributed.string.count), framePath, nil)
+        let lines = CTFrameGetLines(ctFrame) as NSArray
+        let lineCount = lines.count
+        var lineOrigins = UnsafeMutablePointer<CGPoint>.allocate(capacity: lineCount)
+        var lineFrames = UnsafeMutablePointer<CGRect>.allocate(capacity: lineCount)
+        CTFrameGetLineOrigins(ctFrame, CFRange(location: 0, length: 0), lineOrigins)
+        
+        var startOffsetY: CGFloat = 0
+        // Loop throught the lines
+        for i in 0..<lineCount {
+            let line = lines[i] as! CTLine
+            let lineRange = CTLineGetStringRange(line)
+            let lineOrigin = lineOrigins[i]
+            
+            let ascent = UnsafeMutablePointer<CGFloat>.allocate(capacity: 1)
+            let descent = UnsafeMutablePointer<CGFloat>.allocate(capacity: 1)
+            let leading = UnsafeMutablePointer<CGFloat>.allocate(capacity: 1)
+            let lineWidth = CGFloat(CTLineGetTypographicBounds(line, ascent, descent, leading))
+            
+            // If we have more than 1 line, we want to find the real height of the line by measuring the distance between the current line and previous line. If it's only 1 line, then we'll guess the line's height.
+            let useRealHeight = i < lineCount-1
+            let neighborLineY: CGFloat = i > 0 ? lineOrigins[i - 1].y : (lineCount - 1 > i ? lineOrigins[i+1].y : 0.0)
+            let lineHeight: CGFloat = ceil(useRealHeight ? abs(neighborLineY - lineOrigin.y) : ascent[0] + descent[0] + leading[0])
+            
+            lineFrames[i].origin = lineOrigin;
+            lineFrames[i].size = CGSize(width: lineWidth, height: lineHeight)
+            let lineString = textToDraw.substring(with: lineRange.location..<lineRange.location+lineRange.length)
+//            print(lineString)
+            startOffsetY += lineHeight;
+        }
+        
         charHeight = "Leg".size(withAttributes: [.font: font]).height
         
         let topOffset = (bounds.size.height - charHeight) / 2.0
 
+        var index = -1
+        var line: CTLine?
+        if lines.count > 1 {
+            line = lines[1] as! CTLine
+        }
+//        let lineRange = CTLineGetStringRange(line)
         for char in textToDraw {
+            index += 1
+            
+            var origin = CGPoint(x: leftOffset, y: 0)
+            if let line = line {
+                let lineRange = CTLineGetStringRange(line)
+                if index == lineRange.location {
+                    leftOffset = 0
+                }
+                if index >= lineRange.location {
+                    origin = CGPoint(x: leftOffset, y: charHeight)
+                }
+            }
+            
             let charSize = String(char).size(withAttributes: [.font: font])
             charRects.append(
                 CGRect(
-                    origin: CGPoint(
-                        x: leftOffset,
-                        y: topOffset
-                    ),
+                    origin: origin,
                     size: charSize
                 )
             )
@@ -549,4 +612,27 @@ extension LTMorphingLabel {
         }
     }
 
+}
+
+
+extension String {
+    func index(from: Int) -> Index {
+        return self.index(startIndex, offsetBy: from)
+    }
+    
+    func substring(from: Int) -> String {
+        let fromIndex = index(from: from)
+        return String(self[fromIndex...])
+    }
+    
+    func substring(to: Int) -> String {
+        let toIndex = index(from: to)
+        return String(self[..<toIndex])
+    }
+    
+    func substring(with r: Range<Int>) -> String {
+        let startIndex = index(from: r.lowerBound)
+        let endIndex = index(from: r.upperBound)
+        return String(self[startIndex..<endIndex])
+    }
 }
