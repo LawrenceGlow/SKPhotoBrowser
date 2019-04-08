@@ -44,28 +44,28 @@ class SKPagingScrollView: UIScrollView {
         recycledPages.removeAll()
     }
 
-    func loadAdjacentPhotosIfNecessary(_ photo: SKPhotoProtocol, currentPageIndex: Int) {
-        guard let browser = browser, let page = pageDisplayingAtPhoto(photo) else {
-            return
-        }
-        let pageIndex = (page.tag - pageIndexTagOffset)
-        if currentPageIndex == pageIndex {
-            // Previous
-            if pageIndex > 0 {
-                let previousPhoto = browser.photos[pageIndex - 1]
-                if previousPhoto.underlyingImage == nil {
-                    previousPhoto.loadUnderlyingImageAndNotify()
-                }
-            }
-            // Next
-            if pageIndex < numberOfPhotos - 1 {
-                let nextPhoto = browser.photos[pageIndex + 1]
-                if nextPhoto.underlyingImage == nil {
-                    nextPhoto.loadUnderlyingImageAndNotify()
-                }
-            }
-        }
-    }
+//    func loadAdjacentPhotosIfNecessary(_ photo: SKPhotoProtocol, currentPageIndex: Int) {
+//        guard let browser = browser, let page = pageDisplayingAtPhoto(photo) else {
+//            return
+//        }
+//        let pageIndex = (page.tag - pageIndexTagOffset)
+//        if currentPageIndex == pageIndex {
+//            // Previous
+//            if pageIndex > 0 {
+//                let previousPhoto = browser.photos[pageIndex - 1]
+//                if previousPhoto.underlyingImage == nil {
+////                    previousPhoto.loadUnderlyingImageAndNotify()
+//                }
+//            }
+//            // Next
+//            if pageIndex < numberOfPhotos - 1 {
+//                let nextPhoto = browser.photos[pageIndex + 1]
+//                if nextPhoto.underlyingImage == nil {
+////                    nextPhoto.loadUnderlyingImageAndNotify()
+//                }
+//            }
+//        }
+//    }
     
     func deleteImage() {
         // index equals 0 because when we slide between photos delete button is hidden and user cannot to touch on delete button. And visible pages number equals 0

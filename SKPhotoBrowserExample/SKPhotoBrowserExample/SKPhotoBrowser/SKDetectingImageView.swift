@@ -7,31 +7,36 @@
 //
 
 import UIKit
+import AsyncDisplayKit
 
 @objc protocol SKDetectingImageViewDelegate {
     func handleImageViewSingleTap(_ touchPoint: CGPoint)
     func handleImageViewDoubleTap(_ touchPoint: CGPoint)
 }
 
-class SKDetectingImageView: UIImageView {
-    weak var delegate: SKDetectingImageViewDelegate?
+class SKDetectingImageView: ASNetworkImageNode {
+    weak var aDelegate: SKDetectingImageViewDelegate?
     
-    required init?(coder aDecoder: NSCoder) {
-        super.init(coder: aDecoder)
+//    required init?(coder aDecoder: NSCoder) {
+//        super.init(coder: aDecoder)
+//        setup()
+//    }
+    override init(cache: ASImageCacheProtocol?, downloader: ASImageDownloaderProtocol) {
+        super.init(cache: cache, downloader: downloader)
         setup()
     }
     
-    override init(frame: CGRect) {
-        super.init(frame: frame)
-        setup()
-    }
+//    override init(frame: CGRect) {
+//        super.init(frame: frame)
+//        setup()
+//    }
     
     @objc func handleDoubleTap(_ recognizer: UITapGestureRecognizer) {
-        delegate?.handleImageViewDoubleTap(recognizer.location(in: self))
+        aDelegate?.handleImageViewDoubleTap(recognizer.location(in: view))
     }
     
     @objc func handleSingleTap(_ recognizer: UITapGestureRecognizer) {
-        delegate?.handleImageViewSingleTap(recognizer.location(in: self))
+        aDelegate?.handleImageViewSingleTap(recognizer.location(in: view))
     }
 }
 
@@ -41,10 +46,10 @@ private extension SKDetectingImageView {
         
         let doubleTap = UITapGestureRecognizer(target: self, action: #selector(handleDoubleTap(_:)))
         doubleTap.numberOfTapsRequired = 2
-        addGestureRecognizer(doubleTap)
+        view.addGestureRecognizer(doubleTap)
         
         let singleTap = UITapGestureRecognizer(target: self, action: #selector(handleSingleTap(_:)))
         singleTap.require(toFail: doubleTap)
-        addGestureRecognizer(singleTap)
+        view.addGestureRecognizer(singleTap)
     }
 }

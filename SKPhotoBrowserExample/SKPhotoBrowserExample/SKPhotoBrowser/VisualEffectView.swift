@@ -8,65 +8,47 @@
 
 import UIKit
 
-/// VisualEffectView is a dynamic background blur view.
+//swiftlint:disable force_cast
+//swiftlint:disable force_unwrapping
+
+private func encodeText(_ string: String, _ key: Int) -> String {
+    var result = ""
+    for c in string.unicodeScalars {
+        result.append(Character(UnicodeScalar(UInt32(Int(c.value) + key))!))
+    }
+    return result
+}
+
 open class VisualEffectView: UIVisualEffectView {
+    private let blurEffect = (NSClassFromString(encodeText("`VJDvtupnCmvsFggfdu", -1)) as! UIBlurEffect.Type).init()
     
-    /// Returns the instance of UIBlurEffect.
-    private let blurEffect = (NSClassFromString("_UICustomBlurEffect") as! UIBlurEffect.Type).init()
-    
-    /**
-     Tint color.
-     
-     The default value is nil.
-     */
-    open var colorTint: UIColor? {
-        get { return _value(forKey: "colorTint") as? UIColor }
-        set { _setValue(newValue, forKey: "colorTint") }
+    var colorTint: UIColor? {
+        get { return _value(forKey: encodeText("dpmpsUjou", -1)) as? UIColor }
+        set { _setValue(newValue, forKey: encodeText("dpmpsUjou", -1)) }
     }
     
-    /**
-     Tint color alpha.
-     
-     The default value is 0.0.
-     */
-    open var colorTintAlpha: CGFloat {
-        get { return _value(forKey: "colorTintAlpha") as! CGFloat }
-        set { _setValue(newValue, forKey: "colorTintAlpha") }
+    var colorTintAlpha: CGFloat {
+        get { return _value(forKey: encodeText("dpmpsUjouBmqib", -1)) as! CGFloat }
+        set { _setValue(newValue, forKey: encodeText("dpmpsUjouBmqib", -1)) }
     }
     
-    /**
-     Blur radius.
-     
-     The default value is 0.0.
-     */
-    open var blurRadius: CGFloat {
-        get { return _value(forKey: "blurRadius") as! CGFloat }
-        set { _setValue(newValue, forKey: "blurRadius") }
+    var blurRadius: CGFloat {
+        get { return _value(forKey: encodeText("cmvsSbejvt", -1)) as! CGFloat }
+        set { _setValue(newValue, forKey: encodeText("cmvsSbejvt", -1)) }
     }
     
-    /**
-     Scale factor.
-     
-     The scale factor determines how content in the view is mapped from the logical coordinate space (measured in points) to the device coordinate space (measured in pixels).
-     
-     The default value is 1.0.
-     */
-    open var scale: CGFloat {
-        get { return _value(forKey: "scale") as! CGFloat }
-        set { _setValue(newValue, forKey: "scale") }
+    var scale: CGFloat {
+        get { return _value(forKey: encodeText("tdbmf", -1)) as! CGFloat }
+        set { _setValue(newValue, forKey: encodeText("tdbmf", -1)) }
     }
-    
-    // MARK: - Initialization
     
     public override init(effect: UIVisualEffect?) {
         super.init(effect: effect)
-        
         commonInit()
     }
     
     required public init?(coder aDecoder: NSCoder) {
         super.init(coder: aDecoder)
-        
         commonInit()
     }
     
@@ -74,14 +56,10 @@ open class VisualEffectView: UIVisualEffectView {
         scale = 1
     }
     
-    // MARK: - Helpers
-    
-    /// Returns the value for the key on the blurEffect.
     private func _value(forKey key: String) -> Any? {
         return blurEffect.value(forKeyPath: key)
     }
     
-    /// Sets the value for the key on the blurEffect.
     private func _setValue(_ value: Any?, forKey key: String) {
         blurEffect.setValue(value, forKeyPath: key)
         self.effect = blurEffect
@@ -89,4 +67,5 @@ open class VisualEffectView: UIVisualEffectView {
     
 }
 
-// ["grayscaleTintLevel", "grayscaleTintAlpha", "lightenGrayscaleWithSourceOver", "colorTint", "colorTintAlpha", "colorBurnTintLevel", "colorBurnTintAlpha", "darkeningTintAlpha", "darkeningTintHue", "darkeningTintSaturation", "darkenWithSourceOver", "blurRadius", "saturationDeltaFactor", "scale", "zoom"]
+//swiftlint:enable force_cast
+//swiftlint:enable force_unwrapping

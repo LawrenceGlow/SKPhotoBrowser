@@ -186,7 +186,7 @@ open class SKPhotoBrowser: UIViewController {
     }
     
     open func loadAdjacentPhotosIfNecessary(_ photo: SKPhotoProtocol) {
-        pagingScrollView.loadAdjacentPhotosIfNecessary(photo, currentPageIndex: currentPageIndex)
+//        pagingScrollView.loadAdjacentPhotosIfNecessary(photo, currentPageIndex: currentPageIndex)
     }
     
     // MARK: - initialize / setup

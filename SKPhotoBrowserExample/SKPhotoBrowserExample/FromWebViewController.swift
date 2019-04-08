@@ -53,9 +53,31 @@ extension FromWebViewController {
 private extension FromWebViewController {
     func createWebPhotos() -> [SKPhotoProtocol] {
         return (0..<10).map { (i: Int) -> SKPhotoProtocol in
-            let photo = SKPhoto.photoWithImageURL("https://placehold.jp/15\(i)x15\(i).png")
+            var url = "https://s-ec.bstatic.com/images/hotel/max1024x768/812/81255410.jpg"
+            switch i {
+            case 1:
+                url = "https://upload.wikimedia.org/wikipedia/commons/e/e0/Great_view.jpg"
+            case 2:
+                url = "https://pictures.luxuryretreats.com/106964/jamaica_greatview_03.jpg"
+            case 3:
+                url = "https://www.publichotels.com/content/slides/013018-early-check-in1.jpg"
+            case 4:
+                url = "https://wallimpex.com/data/out/803/snowy-winter-scenes-wallpaper-11487975.jpg"
+            case 5:
+                url = "https://previews.123rf.com/images/leonidtit/leonidtit1410/leonidtit141000027/32175148-great-view-on-the-pizes-de-cir-ridge-valley-gardena-national-park-dolomites-south-tyrol-location-ort.jpg"
+            case 6:
+                url = "https://pictures.luxuryretreats.com/106964/jamaica_greatview_04.jpg"
+            case 7:
+                url = "https://pix10.agoda.net/hotelImages/237/237518/237518_16091517420046511770.jpg"
+            case 8:
+                url = "https://s-ec.bstatic.com/images/hotel/max1024x768/466/46697971.jpg"
+            case 9:
+                url = "http://railaygreatview.com/images/617x800x600.jpg"
+            default: break
+            }
+            let photo = SKPhoto.photoWithImageURL(url)
             photo.caption = caption[i%10]
-            photo.shouldCachePhotoURLImage = true
+//            photo.shouldCachePhotoURLImage = true
             return photo
         }
     }

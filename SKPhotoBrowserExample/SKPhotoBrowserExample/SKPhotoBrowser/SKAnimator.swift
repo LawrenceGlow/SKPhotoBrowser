@@ -35,7 +35,7 @@ class SKAnimator: NSObject, SKPhotoBrowserAnimatorDelegate {
         return 0.35
     }
     fileprivate var animationDamping: CGFloat {
-        if SKPhotoBrowserOptions.bounceAnimation { return 0.7 }
+        if SKPhotoBrowserOptions.bounceAnimation { return 0.8 }
         return 1.0
     }
     

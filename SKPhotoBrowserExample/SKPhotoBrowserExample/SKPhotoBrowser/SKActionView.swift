@@ -7,6 +7,7 @@
 //
 
 import UIKit
+//import ZCAnimatedLabel
 
 class SKActionView: UIView {
     var style: SKPhotoBrowser.BrowserStyle!
@@ -17,7 +18,8 @@ class SKActionView: UIView {
     var countLabel: UILabel!
     var moreButton: UIButton!
     var imageView: UIImageView!
-    var captionLabel: LTMorphingLabel!
+    var captionLabel1: UILabel!
+//    var captionLabel2: LTMorphingLabel!
     var shareButton: UIButton!
     
     private let formatter: DateFormatter = {
@@ -26,6 +28,8 @@ class SKActionView: UIView {
         formatter.timeStyle = .none
         return formatter
     }()
+    
+    private let textStyle: (font: UIFont, color: UIColor) = (.systemFont(ofSize: 14), .white)
     
     // Action
     fileprivate var cancelTitle = "Cancel"
@@ -82,18 +86,27 @@ class SKActionView: UIView {
         imageView.backgroundColor = .orange
         bottomBlurView.contentView.addSubview(imageView)
         
-        captionLabel = LTMorphingLabel()
-//        captionLabel.clipsToBounds = true
-//        captionLabel.layerBased = true
+        captionLabel1 = UILabel()
 //        captionLabel.layoutTool.groupType = .char
 //        captionLabel.animationDuration = 0.25
 //        captionLabel.animationDelay = 0.02
-        captionLabel.font = UIFont.systemFont(ofSize: 14)
-        captionLabel.textColor = .white
-//        captionLabel.numberOfLines = 2
-        captionLabel.lineBreakMode = .byTruncatingTail
-        captionLabel.textAlignment = .left
-        bottomBlurView.contentView.addSubview(captionLabel)
+        captionLabel1.font = textStyle.font
+        captionLabel1.textColor = textStyle.color
+        captionLabel1.lineBreakMode = .byTruncatingTail
+        captionLabel1.numberOfLines = 2
+        captionLabel1.textAlignment = .left
+        bottomBlurView.contentView.addSubview(captionLabel1)
+        
+//        captionLabel2 = LTMorphingLabel()
+//        captionLabel2.layerBased = true
+//        captionLabel2.layoutTool.groupType = .char
+//        captionLabel2.animationDuration = 0.25
+//        captionLabel2.animationDelay = 0.02
+//        captionLabel2.font = textStyle.font
+//        captionLabel2.textColor = textStyle.color
+//        captionLabel2.lineBreakMode = .byTruncatingTail
+//        captionLabel2.textAlignment = .left
+//        bottomBlurView.contentView.addSubview(captionLabel2)
         
         shareButton = UIButton(type: .custom)
         shareButton.setImage(UIImage(named: "browser_delete_icon"), for: .normal)
@@ -149,16 +162,22 @@ class SKActionView: UIView {
         )
         imageView.frame = CGRect(
             x: UIApplication.safeInsets.left+16,
-            y: 8,
+            y: 0,
             width: 30,
             height: 30
         )
-        captionLabel.frame = CGRect(
+        captionLabel1.frame = CGRect(
             x: UIApplication.safeInsets.left+16+imageView.frame.width+8,
-            y: 8,
+            y: 0,
             width: bottomBlurView.contentView.frame.width-imageView.frame.width-32-8,
             height: bottomBlurView.contentView.frame.height-UIApplication.safeInsets.bottom-shareButton.frame.height-8
         )
+//        captionLabel2.frame = CGRect(
+//            x: UIApplication.safeInsets.left+16+imageView.frame.width+8,
+//            y: captionLabel1.frame.minY+captionLabel1.frame.height,
+//            width: bottomBlurView.contentView.frame.width-imageView.frame.width-32-8,
+//            height:15
+//        )
 //        setNeedsDisplay()
     }
     
@@ -191,9 +210,12 @@ class SKActionView: UIView {
         }
         
         let caption = createCaption(currentPageIndex)
-        captionLabel.text = caption
-//        captionLabel.attributedString = formatted(caption)
-//        captionLabel.startAppearAnimation()
+        captionLabel1.text = caption
+//        captionLabel2.text = caption.line2
+//        captionLabel1.attributedString = formatted(caption.line1)
+//        captionLabel2.attributedString = formatted(caption.line2)
+//        captionLabel1.startAppearAnimation()
+//        captionLabel2.startAppearAnimation()
     }
     
     func animate(hidden: Bool) {
@@ -209,7 +231,8 @@ class SKActionView: UIView {
             
             self.shareButton.alpha = alpha
             self.imageView.alpha = alpha
-            self.captionLabel.alpha = alpha
+            self.captionLabel1.alpha = alpha
+//            self.captionLabel2.alpha = alpha
             self.bottomBlurView.blurRadius = hidden ? 0 : 10
             self.bottomBlurView.colorTint = hidden ? .clear : .black
         }, completion: nil)
@@ -231,31 +254,63 @@ extension SKActionView {
     func createCaption(_ index: Int) -> String {
         if let delegate = self.browser?.delegate,
             let caption = delegate.captionForPhoto?(at: index) {
-            return caption
+            return caption//coretext(with: caption)
         }
         guard let photo = browser?.photoAtIndex(index),
             let caption = photo.caption else {
-            return ""
+            return ""//coretext(with: "")
         }
-        return caption
+        return caption//coretext(with: caption)
+    }
+    
+    func coretext(with caption: String) -> (String, String) {
+        guard !caption.isEmpty else { return ("", "") }
+
+        let attributed = NSAttributedString(string: caption, attributes: [
+            .font: textStyle.font,
+            .foregroundColor: textStyle.color
+            //            .paragraphStyle: NSParagraphStyle.style(lineHeight: <#T##CGFloat#>, <#T##alignment: NSTextAlignment##NSTextAlignment#>)
+            ]
+        )
+        let frameSetter = CTFramesetterCreateWithAttributedString(attributed)
+        let suggestedSize = CTFramesetterSuggestFrameSizeWithConstraints(
+            frameSetter,
+            CFRange(location: 0, length: attributed.string.count),
+            nil,
+            CGSize(
+                width: captionLabel1.frame.width,
+                height: CGFloat.greatestFiniteMagnitude),
+            nil
+        )
+        let frameRect = CGRect(x: 0, y: 0, width: suggestedSize.width, height: suggestedSize.height)
+        let framePath = CGPath(rect: frameRect, transform: nil)
+        let ctFrame = CTFramesetterCreateFrame(frameSetter, CFRange(location: 0, length: attributed.string.count), framePath, nil)
+        let lines = CTFrameGetLines(ctFrame) as NSArray
+        let lineCount = lines.count > 2 ? 2 : lines.count
+        
+        var result = (line1: "", line2: "")
+        for i in 0..<lineCount {
+            let line = lines[i] as! CTLine
+            let range = CTLineGetStringRange(line)
+            let from = range.location
+            let to = from+range.length
+            if i == 0 {
+                result.line1 = caption.substring(with: from..<to)
+            } else {
+                result.line2 = caption.substring(with: from..<to)
+            }
+        }
+        return result
     }
     
     func formatted(_ text: String) -> NSAttributedString {
         let style = NSParagraphStyle.style(lineHeight: 15, .left)
-//        let image = NSTextAttachment()
-//        image.image = UIImage(named: "browser_close_button")
-////        image.bounds = CGRect(x: 0, y: 0, width: 30, height: 30)
-//        let attachment = NSAttributedString(attachment: image)
-//        let attr = NSMutableAttributedString(attributedString: attachment)
-        
         let text = NSMutableAttributedString(string: text, attributes: [
-            .font: UIFont.boldSystemFont(ofSize: 14),
+            .font: textStyle.font,
             .paragraphStyle: style,
-            .foregroundColor: UIColor.white
+            .foregroundColor: textStyle.color
             ]
         )
-        
-//        attr.append(text)
         return text
     }
 }

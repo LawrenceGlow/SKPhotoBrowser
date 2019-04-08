@@ -7,19 +7,28 @@
 //
 
 import UIKit
-
+import AsyncDisplayKit
 open class SKZoomingScrollView: UIScrollView {
     var captionView: SKCaptionView!
     var photo: SKPhotoProtocol! {
         didSet {
             imageView.image = nil
-            if photo != nil && photo.underlyingImage != nil {
-                displayImage(complete: true)
-                return
+            guard let photo = photo else { return }
+            if let image = photo.underlyingImage {
+                displayImage(image)
+            } else {
+                contentSize = CGSize.zero
+                indicatorView.startAnimating()
+                imageView.url = URL(string: (photo as? SKPhoto)?.photoURL ?? "")
             }
-            if photo != nil {
-                displayImage(complete: false)
-            }
+            
+//            if photo != nil && photo.underlyingImage != nil {
+//                displayImage(complete: true)
+//                return
+//            }
+//            if photo != nil {
+//                displayImage(complete: false)
+//            }
         }
     }
     
@@ -58,11 +67,16 @@ open class SKZoomingScrollView: UIScrollView {
         addSubview(tapView)
         
         // image
-        imageView = SKDetectingImageView(frame: frame)
+        imageView = SKDetectingImageView()
+        imageView.url = URL(string: (photo as? SKPhoto)?.photoURL ?? "")
+        imageView.shouldRenderProgressImages = true
+        imageView.frame = frame
+        imageView.aDelegate = self
         imageView.delegate = self
         imageView.contentMode = .bottom
         imageView.backgroundColor = .clear
-        addSubview(imageView)
+        addSubnode(imageView)
+//        addSubview(imageView)
         
         // indicator
         indicatorView = SKIndicatorView(frame: frame)
@@ -86,7 +100,7 @@ open class SKZoomingScrollView: UIScrollView {
         super.layoutSubviews()
         
         let boundsSize = bounds.size
-        var frameToCenter = imageView.frame
+        var frameToCenter = imageView.view.frame
         
         // horizon
         if frameToCenter.size.width < boundsSize.width {
@@ -102,8 +116,8 @@ open class SKZoomingScrollView: UIScrollView {
         }
         
         // Center
-        if !imageView.frame.equalTo(frameToCenter) {
-            imageView.frame = frameToCenter
+        if !imageView.view.frame.equalTo(frameToCenter) {
+            imageView.view.frame = frameToCenter
         }
     }
     
@@ -117,7 +131,7 @@ open class SKZoomingScrollView: UIScrollView {
         }
         
         let boundsSize = bounds.size
-        let imageSize = imageView.frame.size
+        let imageSize = imageView.view.frame.size
         
         let xScale = boundsSize.width / imageSize.width
         let yScale = boundsSize.height / imageSize.height
@@ -160,7 +174,7 @@ open class SKZoomingScrollView: UIScrollView {
         */
         
         // reset position
-        imageView.frame.origin = CGPoint.zero
+        imageView.view.frame.origin = CGPoint.zero
         setNeedsLayout()
     }
     
@@ -188,7 +202,7 @@ open class SKZoomingScrollView: UIScrollView {
         } else {
             imageViewFrame.size = image.size
         }
-        imageView.frame = imageViewFrame
+        imageView.view.frame = imageViewFrame
         
         contentSize = imageViewFrame.size
         setMaxMinZoomScalesForCurrentBounds()
@@ -204,7 +218,7 @@ open class SKZoomingScrollView: UIScrollView {
             if photo.underlyingImage == nil {
                 indicatorView.startAnimating()
             }
-            photo.loadUnderlyingImageAndNotify()
+//            photo.loadUnderlyingImageAndNotify()
         } else {
             indicatorView.stopAnimating()
         }
@@ -215,6 +229,34 @@ open class SKZoomingScrollView: UIScrollView {
 			// change contentSize will reset contentOffset, so only set the contentsize zero when the image is nil
 			contentSize = CGSize.zero
 		}
+        setNeedsLayout()
+    }
+    
+    open func displayImage() {
+        guard let image = imageView.image else { return }
+        
+        // reset scale
+        maximumZoomScale = 1
+        minimumZoomScale = 1
+        zoomScale = 1
+        
+        imageView.contentMode = photo.contentMode
+        
+        var imageViewFrame: CGRect = .zero
+        imageViewFrame.origin = .zero
+        
+        // long photo
+        if SKPhotoBrowserOptions.longPhotoWidthMatchScreen && image.size.height >= image.size.width {
+            let imageHeight = SKMesurement.screenWidth / image.size.width * image.size.height
+            imageViewFrame.size = CGSize(width: SKMesurement.screenWidth, height: imageHeight)
+        } else {
+            imageViewFrame.size = image.size
+        }
+        imageView.view.frame = imageViewFrame
+        
+        contentSize = imageViewFrame.size
+        setMaxMinZoomScalesForCurrentBounds()
+        
         setNeedsLayout()
     }
     
@@ -252,7 +294,7 @@ open class SKZoomingScrollView: UIScrollView {
 
 extension SKZoomingScrollView: UIScrollViewDelegate {
     public func viewForZooming(in scrollView: UIScrollView) -> UIView? {
-        return imageView
+        return imageView.view
     }
     
     public func scrollViewWillBeginZooming(_ scrollView: UIScrollView, with view: UIView?) {
@@ -316,7 +358,7 @@ private extension SKZoomingScrollView {
         let viewTouchPoint = touch.location(in: view)
         let viewWidthTouch = viewTouchPoint.x
         let viewPercentTouch = viewWidthTouch / oneWidthViewPercent
-        let photoWidth = imageView.bounds.width
+        let photoWidth = imageView.view.bounds.width
         let onePhotoPercent = photoWidth / 100
         let needPoint = viewPercentTouch * onePhotoPercent
         
@@ -325,7 +367,7 @@ private extension SKZoomingScrollView {
         if viewTouchPoint.y < view.bounds.height / 2 {
             Y = 0
         } else {
-            Y = imageView.bounds.height
+            Y = imageView.view.bounds.height
         }
         let allPoint = CGPoint(x: needPoint, y: Y)
         return allPoint
@@ -338,5 +380,16 @@ private extension SKZoomingScrollView {
         let y = touchPoint.y - (w / max(SKMesurement.screenScale, 2.0))
         
         return CGRect(x: x, y: y, width: w, height: h)
+    }
+}
+
+extension SKZoomingScrollView: ASNetworkImageNodeDelegate {
+    public func imageNode(_ imageNode: ASNetworkImageNode, didLoad image: UIImage) {
+        indicatorView.stopAnimating()
+        displayImage()
+    }
+    
+    public func imageNode(_ imageNode: ASNetworkImageNode, didFailWithError error: Error) {
+        indicatorView.stopAnimating()
     }
 }
